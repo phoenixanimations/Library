@@ -3,8 +3,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Catalog 
+public class LibraryFile 
 {
 	public File file;
-	public List<String> Tags = new ArrayList<>();
+	public List<String> tags = new ArrayList<>();
 }

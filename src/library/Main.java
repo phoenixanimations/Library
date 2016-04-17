@@ -89,20 +89,27 @@ public class Main
 	
 	private void findFileExample () throws IOException
 	{
-		List<File> fileExtensions = new ArrayList<File>();
+		List<LibraryFile> catalog = new ArrayList<LibraryFile>();
+		LibraryFile newLibraryFile = new LibraryFile();
 		try
 		{
 			Files.walk(Paths.get("./img"))
 				 .filter(Files::isRegularFile)
 				 .filter(e -> e.toString().toLowerCase().contains(".jpeg") || 
-					  	   	  e.toString().toLowerCase().contains(".jpg"))
-				 .forEach(x -> fileExtensions.add(x.toFile()));
+					  	   	  e.toString().toLowerCase().contains(".jpg") ||
+					  	   	  e.toString().toLowerCase().contains(".png") ||
+					  	   	  e.toString().toLowerCase().contains(".tiff"));
+//Write out what you want to do with this.
+//Find out how many files need to be cataloged and sort each one.
+//				 .forEach(e -> newfi);
+//				 .forEach(e -> newLibraryFile.file = );
 		}
 		catch (IOException e)
 		{
 			e.printStackTrace();
 		}
-//		fileExtensions.forEach(x -> System.out.println(x.toString()));	
-		Desktop.getDesktop().open(fileExtensions.get(0));
+//		catalog.forEach(c-> System.out.println(c.file.toString()));
+//		fileExtensions.forEach(f -> System.out.println(f));
+//		Desktop.getDesktop().open(fileExtensions.get(0));
 	}
 }
