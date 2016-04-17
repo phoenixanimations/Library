@@ -6,6 +6,10 @@
 # Ignore the Image/Movie/Music folder
 img/
 
+# Disclude package files
+*.war
+*.ear
+
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 /bin/
