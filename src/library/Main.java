@@ -3,18 +3,20 @@ package library;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
-public class Main {
-
+public class Main 
+{
 	private JFrame frame;
 
-	/**
-	 * Launch the application.
-	 */
+	/**************************
+	 **Launch the application**
+	 **************************/
 	public static void main(String[] args) 
 	{
-		EventQueue.invokeLater
-		(new Runnable() 
+		EventQueue.invokeLater(new Runnable() 
 		{
 			public void run() 
 			{
@@ -28,31 +30,53 @@ public class Main {
 					e.printStackTrace();
 				}
 			}
-		}
-		);
+		});
 	}
 
-	/**
-	 * Create the application.
-	 */
+	/**************************
+	 **Create the application**
+	 **************************/
 	public Main() 
 	{
 		initialize();
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize()
+	/**************************
+	 **Initialize Application**
+	 **************************/
+	private void initialize() 
 	{
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
+		buttonExample ();
+	}
+	
+	/**************************
+	 *********Buttons**********
+	 **************************/
+	private void buttonExample ()
+	{
+		JButton btnNewButton = new JButton("New button");
+		btnNewButton.addActionListener(new ActionListener() 
+		{
+			/**************************
+			 *********On Click*********
+			 **************************/
+			public void actionPerformed(ActionEvent e)
+			{
+				System.out.println("hi");
+			}
+		});
+		btnNewButton.setBounds(6, 6, 135, 29);
+		frame.getContentPane().add(btnNewButton);
 	}
 }
 
 /*
- 	public void onClick() throws IOException  
+
+public void onClick() throws IOException  
 	{
 		testingButton = "yay";
 		lblHi.setText(testingButton);
@@ -72,4 +96,9 @@ public class Main {
 		fileExtensions.forEach(x -> System.out.println(x.toString()));	
 		Desktop.getDesktop().open(fileExtensions.get(0));
 		Desktop.getDesktop().open(fileExtensions.get(1));
- */
+
+	}	
+
+
+
+*/
