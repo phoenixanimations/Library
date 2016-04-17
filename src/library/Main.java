@@ -1,10 +1,17 @@
 package library;
 
+import java.awt.Desktop;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
 public class Main 
@@ -66,39 +73,36 @@ public class Main
 			 **************************/
 			public void actionPerformed(ActionEvent e)
 			{
-				System.out.println("hi");
+				try 
+				{
+					findFileExample();
+				} 
+				catch (IOException e1) 
+				{
+					e1.printStackTrace();
+				}
 			}
 		});
 		btnNewButton.setBounds(6, 6, 135, 29);
 		frame.getContentPane().add(btnNewButton);
 	}
-}
-
-/*
-
-public void onClick() throws IOException  
+	
+	private void findFileExample () throws IOException
 	{
-		testingButton = "yay";
-		lblHi.setText(testingButton);
 		List<File> fileExtensions = new ArrayList<File>();
-		try 
+		try
 		{
-			 Files.walk(Paths.get("./img"))
-			 	  .filter(Files::isRegularFile)
-				  .filter(e -> e.toString().toLowerCase().contains(".jpeg") || 
-						  	   e.toString().toLowerCase().contains(".jpg"))
-				  .forEach(x -> fileExtensions.add(x.toFile()));
-		} 
-		catch (IOException e) 
+			Files.walk(Paths.get("./img"))
+				 .filter(Files::isRegularFile)
+				 .filter(e -> e.toString().toLowerCase().contains(".jpeg") || 
+					  	   	  e.toString().toLowerCase().contains(".jpg"))
+				 .forEach(x -> fileExtensions.add(x.toFile()));
+		}
+		catch (IOException e)
 		{
 			e.printStackTrace();
 		}
-		fileExtensions.forEach(x -> System.out.println(x.toString()));	
+//		fileExtensions.forEach(x -> System.out.println(x.toString()));	
 		Desktop.getDesktop().open(fileExtensions.get(0));
-		Desktop.getDesktop().open(fileExtensions.get(1));
-
-	}	
-
-
-
-*/
+	}
+}
