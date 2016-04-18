@@ -25,6 +25,8 @@ import javax.swing.AbstractAction;
 
 import javax.swing.JTextField;
 import java.awt.Choice;
+import java.awt.TextArea;
+import java.awt.TextField;
 
 public class Main 
 {
@@ -71,64 +73,47 @@ public class Main
 		frame.setBounds(100, 100, 600, 472);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		textField ();
-		buttonExample ();
 		choiceExample ();
 	}
 	
 	/**************************
 	 ********Text Field********
 	 **************************/
+	private List<LibraryFile> catalog = new ArrayList<>();	
 	private void textField ()
 	{
 		textField = new JTextField();
 		textField.addActionListener(new AbstractAction() 
 		{
 			private static final long serialVersionUID = 1L;
-			@Override
 			public void actionPerformed(ActionEvent e) 
 			{
-				System.out.println("Do search here");
+				for (LibraryFile libraryFile : catalog) 
+				{
+					for (String libraryFileTags : libraryFile.tags) 
+					{
+						if (libraryFileTags.compareTo(textField.getText()) == 0)
+						{
+							System.out.println("I did it! " + libraryFile.name + "tagged with: " + libraryFileTags);
+						}
+					}
+				}
+				textField.setText("");
 			}
 		});
+		frame.getContentPane().setLayout(null);
 		textField.setBounds(6, 6, 588, 28);
 		frame.getContentPane().add(textField);
 		textField.setColumns(10);
 	}
 	
 	/**************************
-	 *********Buttons**********
+	 ***********Choice*********
 	 **************************/
-	private void buttonExample ()
-	{
-		JButton btnNewButton = new JButton("New button");
-		btnNewButton.setBounds(477, 416, 117, 28);
-		btnNewButton.addActionListener(new ActionListener() 
-		{
-			/**************************
-			 *********On Click*********
-			 **************************/
-			public void actionPerformed(ActionEvent e)
-			{
-//				try 
-//				{
-////					findFileExample();
-//				} 
-//				catch (IOException e1) 
-//				{
-//					e1.printStackTrace();
-//				}
-			}
-		});
-		frame.getContentPane().setLayout(null);
-		frame.getContentPane().add(btnNewButton);
-		
-	}
-	
 	private void choiceExample () 
 	{
 		Choice choice = new Choice();
 		choice.setBounds(16, 40, 117, 27);
-		List<LibraryFile> catalog = new ArrayList<>();
 		try
 		{
 			/**************************
@@ -147,21 +132,38 @@ public class Main
 			e.printStackTrace();
 		}
 		catalog.forEach(c -> choice.add(c.name));
-		choice.addItemListener(new ItemListener() 
+		
+		/**************************
+		 ******Tag Text Field******
+		 **************************/
+		TextField choiceTextField = new TextField();
+		choiceTextField.setBounds(139, 40, 132, 27);
+		choiceTextField.addActionListener(new AbstractAction() 
 		{
-			public void itemStateChanged(ItemEvent e) 
+			private static final long serialVersionUID = 2L;
+			public void actionPerformed(ActionEvent e) 
 			{
-				catalog.forEach(lf -> compareStringToFile(choice.getSelectedItem(), lf.file.toString()));				
+				if (choiceTextField.getText().compareTo("") != 0)
+				{
+					for (LibraryFile libraryFile : catalog) 
+					{
+						String choiceString = choice.getSelectedItem();
+						String libraryFileString = FilenameUtils.getBaseName(libraryFile.file.toString());
+						if (choiceString.compareTo(libraryFileString) == 0)
+						{
+							libraryFile.tags.add(choiceTextField.getText());
+							System.out.println(libraryFile.name + ": was tagged with: " + choiceTextField.getText());
+							choiceTextField.setText("");
+						}
+					}
+				}
 			}
 		});
-		frame.getContentPane().add(choice);		
-	}
-	
-	private void compareStringToFile (String string, String file)
-	{
-		if (string.compareTo(FilenameUtils.getBaseName(file)) == 0)
-		{
-			System.out.println(string + " = " + file.toString());
-		}
+
+		/**************************
+		 *******Add to Frame*******
+		 **************************/		
+		frame.getContentPane().add(choice);
+		frame.getContentPane().add(choiceTextField);
 	}
 }
