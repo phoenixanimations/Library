@@ -1,31 +1,16 @@
 package library;
-
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.event.ActionEvent;
-
-
 import org.apache.commons.io.FilenameUtils;
-
-
-
 import javax.swing.AbstractAction;
-
-
 import javax.swing.JTextField;
 import java.awt.Choice;
-import java.awt.TextArea;
 import java.awt.TextField;
 
 public class Main 
