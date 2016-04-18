@@ -1,22 +1,35 @@
 package library;
 
-import java.awt.Desktop;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 import java.awt.event.ActionEvent;
+
+
+import org.apache.commons.io.FilenameUtils;
+
+
+
+import javax.swing.AbstractAction;
+
+
+import javax.swing.JTextField;
+import java.awt.Choice;
 
 public class Main 
 {
 	private JFrame frame;
+	private JTextField textField;
 
 	/**************************
 	 **Launch the application**
@@ -54,10 +67,32 @@ public class Main
 	private void initialize() 
 	{
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setResizable(false);
+		frame.setBounds(100, 100, 600, 472);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		textField ();
 		buttonExample ();
+		choiceExample ();
+	}
+	
+	/**************************
+	 ********Text Field********
+	 **************************/
+	private void textField ()
+	{
+		textField = new JTextField();
+		textField.addActionListener(new AbstractAction() 
+		{
+			private static final long serialVersionUID = 1L;
+			@Override
+			public void actionPerformed(ActionEvent e) 
+			{
+				System.out.println("Do search here");
+			}
+		});
+		textField.setBounds(6, 6, 588, 28);
+		frame.getContentPane().add(textField);
+		textField.setColumns(10);
 	}
 	
 	/**************************
@@ -66,6 +101,7 @@ public class Main
 	private void buttonExample ()
 	{
 		JButton btnNewButton = new JButton("New button");
+		btnNewButton.setBounds(477, 416, 117, 28);
 		btnNewButton.addActionListener(new ActionListener() 
 		{
 			/**************************
@@ -73,43 +109,59 @@ public class Main
 			 **************************/
 			public void actionPerformed(ActionEvent e)
 			{
-				try 
-				{
-					findFileExample();
-				} 
-				catch (IOException e1) 
-				{
-					e1.printStackTrace();
-				}
+//				try 
+//				{
+////					findFileExample();
+//				} 
+//				catch (IOException e1) 
+//				{
+//					e1.printStackTrace();
+//				}
 			}
 		});
-		btnNewButton.setBounds(6, 6, 135, 29);
+		frame.getContentPane().setLayout(null);
 		frame.getContentPane().add(btnNewButton);
+		
 	}
 	
-	private void findFileExample () throws IOException
+	private void choiceExample () 
 	{
-		List<LibraryFile> catalog = new ArrayList<LibraryFile>();
-		LibraryFile newLibraryFile = new LibraryFile();
+		Choice choice = new Choice();
+		choice.setBounds(16, 40, 117, 27);
+		List<LibraryFile> catalog = new ArrayList<>();
 		try
 		{
+			/**************************
+			 ******Catalog Files*******
+			 **************************/
 			Files.walk(Paths.get("./img"))
 				 .filter(Files::isRegularFile)
 				 .filter(e -> e.toString().toLowerCase().contains(".jpeg") || 
 					  	   	  e.toString().toLowerCase().contains(".jpg") ||
 					  	   	  e.toString().toLowerCase().contains(".png") ||
-					  	   	  e.toString().toLowerCase().contains(".tiff"));
-//Write out what you want to do with this.
-//Find out how many files need to be cataloged and sort each one.
-//				 .forEach(e -> newfi);
-//				 .forEach(e -> newLibraryFile.file = );
+					  	   	  e.toString().toLowerCase().contains(".tiff"))
+				 .forEach(e -> catalog.add(new LibraryFile(FilenameUtils.getBaseName(e.toString()), e.toFile())));
 		}
 		catch (IOException e)
 		{
 			e.printStackTrace();
 		}
-//		catalog.forEach(c-> System.out.println(c.file.toString()));
-//		fileExtensions.forEach(f -> System.out.println(f));
-//		Desktop.getDesktop().open(fileExtensions.get(0));
+		catalog.forEach(c -> choice.add(c.name));
+		choice.addItemListener(new ItemListener() 
+		{
+			public void itemStateChanged(ItemEvent e) 
+			{
+				catalog.forEach(lf -> compareStringToFile(choice.getSelectedItem(), lf.file.toString()));				
+			}
+		});
+		frame.getContentPane().add(choice);		
+	}
+	
+	private void compareStringToFile (String string, String file)
+	{
+		if (string.compareTo(FilenameUtils.getBaseName(file)) == 0)
+		{
+			System.out.println(string + " = " + file.toString());
+		}
 	}
 }
