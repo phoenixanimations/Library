@@ -1,23 +1,36 @@
 package library;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
+import javax.swing.JList;
+import javax.swing.JScrollPane;
+
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.sql.Array;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.awt.event.ActionEvent;
 import org.apache.commons.io.FilenameUtils;
+
+import com.sun.corba.se.spi.orb.StringPair;
+
 import javax.swing.AbstractAction;
+import javax.swing.DefaultListModel;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
+
 import java.awt.Choice;
 import java.awt.TextField;
+import javax.swing.JSplitPane;
 
 public class Main 
 {
 	private JFrame frame;
-	private JTextField textField;
-
 	/**************************
 	 **Launch the application**
 	 **************************/
@@ -67,7 +80,8 @@ public class Main
 	private List<LibraryFile> catalog = new ArrayList<>();	
 	private void textField ()
 	{
-		textField = new JTextField();
+		JTextField textField = new JTextField();
+		
 		textField.addActionListener(new AbstractAction() 
 		{
 			private static final long serialVersionUID = 1L;
@@ -144,11 +158,23 @@ public class Main
 				}
 			}
 		});
-
+		
+		/**************************
+		 ********Split Pane********
+		 **************************/
+		DefaultListModel<String> defaultListLibraryFile = new DefaultListModel<String>();
+		catalog.forEach(f -> defaultListLibraryFile.addElement(f.name));
+		JList<String> jListLibraryFiles = new JList<String>(defaultListLibraryFile);
+		JScrollPane scrollPane = new JScrollPane(jListLibraryFiles);
+		scrollPane.setBounds(20, 189, 300, 179);
+		
+		
+		
 		/**************************
 		 *******Add to Frame*******
 		 **************************/		
 		frame.getContentPane().add(choice);
 		frame.getContentPane().add(choiceTextField);
+		frame.getContentPane().add(scrollPane);
 	}
 }
