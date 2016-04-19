@@ -1,15 +1,22 @@
 package library;
 import java.awt.EventQueue;
+import java.awt.GridLayout;
+import java.awt.Label;
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.SynchronousQueue;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import org.apache.commons.io.FilenameUtils;
 import javax.imageio.ImageIO;
@@ -19,13 +26,14 @@ import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import java.awt.Choice;
 import java.awt.TextField;
 import javax.swing.JSplitPane;
 
 public class Main 
 {
 	private JFrame frame;
+	private JList<String> jListLibraryFiles;
+	private LibraryFile currentLibraryFile;
 	/**************************
 	 **Launch the application**
 	 **************************/
@@ -100,10 +108,50 @@ public class Main
 		frame.getContentPane().add(textField);
 		textField.setColumns(10);
 	}
+	/**************************
+	 ********Show Tags********
+	 **************************/
+//	DefaultListModel<TextField> showCurrentTags = new DefaultListModel<TextField>();
+//	catalog.forEach(f -> f.tags.forEach(t -> showCurrentTags.addElement(new TextField(t))));
+//	JList<TextField> jListTagsTextField = new JList<TextField>(showCurrentTags);
+//	JScrollPane scrollCurrentTags = new JScrollPane(jListTagsTextField);
+//	scrollCurrentTags.setBounds(10, 60, 584, -24);
+	//Action listener.
+	private void showTags()
+	{
+//		if (currentLibraryFile == null) return;
+		
+		
+	    /*
+	      JPanel panel = new JPanel(new GridLayout(0,1));
+  JRadioButton myRadio;
+  for(int i = 0; i<100; i++){
+      myRadio = new JRadioButton("text" + i);
+      panel.add(myRadio);
+   }
+  JScrollPane scrollPane = new JScrollPane(panel);
+	    
+	     */
+		
+		
+		
+	   JPanel listOfTags = new JPanel(new GridLayout(1,0));
+	   for (int i = 0; i<100; i++)
+	   {
+		   JTextField tag = new JTextField("hi");
+		   listOfTags.add(tag);
+	   }
+	    
+	    JScrollPane tagScrollPane = new JScrollPane(listOfTags);
+	    tagScrollPane.setBounds(10, 39, 584, 47);
+	    frame.getContentPane().add(tagScrollPane);	
+	    frame.repaint();
+	}
 	
 	/**************************
 	 *********Split Tag********
 	 **************************/
+	//Should be as soon as something is tagged it goes away. Things in the viewbox are either showing a list of untagged items, or the tagged items you want.  
 	private void splitTagExample () 
 	{
 		/**************************
@@ -123,6 +171,8 @@ public class Main
 		{
 			e.printStackTrace();
 		}
+		
+		catalog.forEach(t -> t.tags.add("Default"));  
 				
 		/**************************
 		 ********Split Pane********
@@ -133,7 +183,7 @@ public class Main
 		JLabel previewImage = new JLabel();
 		previewImage.setHorizontalAlignment(JLabel.CENTER);
 		
-		JList<String> jListLibraryFiles = new JList<String>(defaultListLibraryFile);
+		jListLibraryFiles = new JList<String>(defaultListLibraryFile);
 		jListLibraryFiles.addListSelectionListener(new ListSelectionListener() 
 		{	
 			public void valueChanged(ListSelectionEvent e) 
@@ -142,10 +192,18 @@ public class Main
 				{
 					if (libraryFile.name.equals(jListLibraryFiles.getSelectedValue()))
 					{
+						currentLibraryFile = libraryFile;
+						showTags();
 						BufferedImage imageIO = null;
 						try
 						{
 							imageIO = ImageIO.read(libraryFile.file);
+							String allTags = "Tagged with: ";
+							for (String tags : libraryFile.tags) 
+							{
+								allTags += tags + ", ";
+							}
+							System.out.println(allTags);
 						}
 						catch (Exception exception)
 						{
@@ -196,16 +254,14 @@ public class Main
 		imageAndTagPane.setEnabled(false);
 		
 		JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,textScrollPane,imageAndTagPane);
-		splitPane.setSize(588, 376);
-		splitPane.setLocation(6, 68);
+		splitPane.setSize(588, 350);
+		splitPane.setLocation(6, 94);
 		splitPane.setDividerLocation(260);
 
 		
 		/**************************
 		 *******Add to Frame*******
-		 **************************/		
-//		frame.getContentPane().add(choice);
-//		frame.getContentPane().add(choiceTextField);
+		 **************************/
 		frame.getContentPane().add(splitPane);
 	}
 }
