@@ -4,35 +4,22 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
-
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.sql.Array;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
-
 import org.apache.commons.io.FilenameUtils;
-
-import com.sun.corba.se.spi.orb.StringPair;
-
 import javax.imageio.ImageIO;
 import javax.swing.AbstractAction;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
-import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-
 import java.awt.Choice;
-import java.awt.Dimension;
 import java.awt.TextField;
 import javax.swing.JSplitPane;
 
@@ -79,7 +66,7 @@ public class Main
 		frame.setBounds(100, 100, 600, 472);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		textField ();
-		choiceExample ();
+		splitTagExample ();
 	}
 	
 	/**************************
@@ -115,17 +102,15 @@ public class Main
 	}
 	
 	/**************************
-	 ***********Choice*********
+	 *********Split Tag********
 	 **************************/
-	private void choiceExample () 
+	private void splitTagExample () 
 	{
-		Choice choice = new Choice();
-		choice.setBounds(16, 40, 117, 27);
+		/**************************
+		 ******Catalog Files*******
+		 **************************/
 		try
 		{
-			/**************************
-			 ******Catalog Files*******
-			 **************************/
 			Files.walk(Paths.get("./img"))
 				 .filter(Files::isRegularFile)
 				 .filter(e -> e.toString().toLowerCase().contains(".jpeg") || 
@@ -138,35 +123,7 @@ public class Main
 		{
 			e.printStackTrace();
 		}
-		catalog.forEach(c -> choice.add(c.name));
-		
-		/**************************
-		 ******Tag Text Field******
-		 **************************/
-		TextField choiceTextField = new TextField();
-		choiceTextField.setBounds(139, 40, 132, 27);
-		choiceTextField.addActionListener(new AbstractAction() 
-		{
-			private static final long serialVersionUID = 2L;
-			public void actionPerformed(ActionEvent e) 
-			{
-				if (choiceTextField.getText().compareTo("") != 0)
-				{
-					for (LibraryFile libraryFile : catalog) 
-					{
-						String choiceString = choice.getSelectedItem();
-						String libraryFileString = FilenameUtils.getBaseName(libraryFile.file.toString());
-						if (choiceString.compareTo(libraryFileString) == 0)
-						{
-							libraryFile.tags.add(choiceTextField.getText());
-							System.out.println(libraryFile.name + ": was tagged with: " + choiceTextField.getText());
-							choiceTextField.setText("");
-						}
-					}
-				}
-			}
-		});
-		
+				
 		/**************************
 		 ********Split Pane********
 		 **************************/
@@ -200,6 +157,33 @@ public class Main
 				}
 			}
 		});
+			
+		/**************************
+		 ******Tag Text Field******
+		 **************************/
+		TextField choiceTextField = new TextField();
+		choiceTextField.setBounds(139, 40, 132, 27);
+		choiceTextField.addActionListener(new AbstractAction() 
+		{
+			private static final long serialVersionUID = 2L;
+			public void actionPerformed(ActionEvent e) 
+			{
+				if (choiceTextField.getText().compareTo("") != 0)
+				{
+					for (LibraryFile libraryFile : catalog) 
+					{
+						String splitTagString = jListLibraryFiles.getSelectedValue();
+						String libraryFileString = FilenameUtils.getBaseName(libraryFile.file.toString());
+						if (splitTagString.compareTo(libraryFileString) == 0)
+						{
+							libraryFile.tags.add(choiceTextField.getText());
+							System.out.println(libraryFile.name + ": was tagged with: " + choiceTextField.getText());
+							choiceTextField.setText("");
+						}
+					}
+				}
+			}
+		});
 		
 		JScrollPane textScrollPane = new JScrollPane(jListLibraryFiles);
 		textScrollPane.setBounds(20, 189, 300, 179);
@@ -207,10 +191,15 @@ public class Main
 		JScrollPane imageScrollPane = new JScrollPane(previewImage);
 		imageScrollPane.setBounds(20, 189, 300, 179);
 		
-		JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,textScrollPane,previewImage);
+		JSplitPane imageAndTagPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT,previewImage,choiceTextField);
+		imageAndTagPane.setDividerLocation(333);
+		imageAndTagPane.setEnabled(false);
+		
+		JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,textScrollPane,imageAndTagPane);
 		splitPane.setSize(588, 376);
 		splitPane.setLocation(6, 68);
 		splitPane.setDividerLocation(260);
+
 		
 		/**************************
 		 *******Add to Frame*******
