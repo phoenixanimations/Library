@@ -1,22 +1,17 @@
 package library;
 import java.awt.EventQueue;
 import java.awt.GridLayout;
-import java.awt.Label;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.SynchronousQueue;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import org.apache.commons.io.FilenameUtils;
 import javax.imageio.ImageIO;
@@ -34,6 +29,7 @@ public class Main
 	private JFrame frame;
 	private JList<String> jListLibraryFiles;
 	private LibraryFile currentLibraryFile;
+	private JScrollPane tagScrollPane = new JScrollPane(); 
 	/**************************
 	 **Launch the application**
 	 **************************/
@@ -75,6 +71,7 @@ public class Main
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		textField ();
 		splitTagExample ();
+		frame.getContentPane().add(tagScrollPane);
 	}
 	
 	/**************************
@@ -104,48 +101,27 @@ public class Main
 			}
 		});
 		frame.getContentPane().setLayout(null);
-		textField.setBounds(6, 6, 588, 28);
+		textField.setBounds(4, 6, 592, 28);
 		frame.getContentPane().add(textField);
 		textField.setColumns(10);
 	}
 	/**************************
 	 ********Show Tags********
 	 **************************/
-//	DefaultListModel<TextField> showCurrentTags = new DefaultListModel<TextField>();
-//	catalog.forEach(f -> f.tags.forEach(t -> showCurrentTags.addElement(new TextField(t))));
-//	JList<TextField> jListTagsTextField = new JList<TextField>(showCurrentTags);
-//	JScrollPane scrollCurrentTags = new JScrollPane(jListTagsTextField);
-//	scrollCurrentTags.setBounds(10, 60, 584, -24);
-	//Action listener.
 	private void showTags()
 	{
-//		if (currentLibraryFile == null) return;
-		
-		
-	    /*
-	      JPanel panel = new JPanel(new GridLayout(0,1));
-  JRadioButton myRadio;
-  for(int i = 0; i<100; i++){
-      myRadio = new JRadioButton("text" + i);
-      panel.add(myRadio);
-   }
-  JScrollPane scrollPane = new JScrollPane(panel);
-	    
-	     */
-		
-		
-		
 	   JPanel listOfTags = new JPanel(new GridLayout(1,0));
-	   for (int i = 0; i<100; i++)
+	   for (int i = 0; i < currentLibraryFile.tags.size(); i++)
 	   {
-		   JTextField tag = new JTextField("hi");
+		   JTextField tag = new JTextField(currentLibraryFile.tags.get(i));
 		   listOfTags.add(tag);
 	   }
-	    
-	    JScrollPane tagScrollPane = new JScrollPane(listOfTags);
-	    tagScrollPane.setBounds(10, 39, 584, 47);
-	    frame.getContentPane().add(tagScrollPane);	
-	    frame.repaint();
+	   	frame.remove(tagScrollPane);
+	    tagScrollPane = new JScrollPane(listOfTags);
+	    frame.getContentPane().add(tagScrollPane);
+		tagScrollPane.setBounds(6, 44, 588, 48);
+		tagScrollPane.repaint();
+		tagScrollPane.revalidate();
 	}
 	
 	/**************************
@@ -172,7 +148,8 @@ public class Main
 			e.printStackTrace();
 		}
 		
-		catalog.forEach(t -> t.tags.add("Default"));  
+		catalog.forEach(t -> t.tags.add("Default")); 
+
 				
 		/**************************
 		 ********Split Pane********
@@ -194,16 +171,11 @@ public class Main
 					{
 						currentLibraryFile = libraryFile;
 						showTags();
+						
 						BufferedImage imageIO = null;
 						try
 						{
 							imageIO = ImageIO.read(libraryFile.file);
-							String allTags = "Tagged with: ";
-							for (String tags : libraryFile.tags) 
-							{
-								allTags += tags + ", ";
-							}
-							System.out.println(allTags);
 						}
 						catch (Exception exception)
 						{
@@ -211,6 +183,7 @@ public class Main
 						}
 						ImageIcon renderLibraryFile = new ImageIcon(imageIO);
 						previewImage.setIcon(renderLibraryFile);
+						
 					}	
 				}
 			}
@@ -235,7 +208,7 @@ public class Main
 						if (splitTagString.compareTo(libraryFileString) == 0)
 						{
 							libraryFile.tags.add(choiceTextField.getText());
-							System.out.println(libraryFile.name + ": was tagged with: " + choiceTextField.getText());
+//							System.out.println(libraryFile.name + ": was tagged with: " + choiceTextField.getText());
 							choiceTextField.setText("");
 						}
 					}
@@ -250,14 +223,13 @@ public class Main
 		imageScrollPane.setBounds(20, 189, 300, 179);
 		
 		JSplitPane imageAndTagPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT,previewImage,choiceTextField);
-		imageAndTagPane.setDividerLocation(333);
+		imageAndTagPane.setDividerLocation(310);
 		imageAndTagPane.setEnabled(false);
 		
 		JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,textScrollPane,imageAndTagPane);
 		splitPane.setSize(588, 350);
 		splitPane.setLocation(6, 94);
 		splitPane.setDividerLocation(260);
-
 		
 		/**************************
 		 *******Add to Frame*******
