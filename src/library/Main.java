@@ -154,7 +154,7 @@ public class Main
 		/**************************
 		 ********Split Pane********
 		 **************************/
-		DefaultListModel<String> defaultListLibraryFile = new DefaultListModel<String>();
+		DefaultListModel<String> defaultListLibraryFile = new DefaultListModel<String>(); //change placement.
 		catalog.forEach(f -> defaultListLibraryFile.addElement(f.name));
 		
 		JLabel previewImage = new JLabel();
@@ -199,18 +199,27 @@ public class Main
 			private static final long serialVersionUID = 2L;
 			public void actionPerformed(ActionEvent e) 
 			{
-				if (choiceTextField.getText().compareTo("") != 0)
+				if (currentLibraryFile == null)
 				{
-					for (LibraryFile libraryFile : catalog) 
+					choiceTextField.getText();
+					choiceTextField.setText("");
+					return;
+				}
+				if (choiceTextField.getText().equals("") == false)
+				{
+					Boolean notAlreadyTagged = true;
+					for (String tag : currentLibraryFile.tags) 
 					{
-						String splitTagString = jListLibraryFiles.getSelectedValue();
-						String libraryFileString = FilenameUtils.getBaseName(libraryFile.file.toString());
-						if (splitTagString.compareTo(libraryFileString) == 0)
+						if (tag.equals(choiceTextField.getText()))
 						{
-							libraryFile.tags.add(choiceTextField.getText());
-//							System.out.println(libraryFile.name + ": was tagged with: " + choiceTextField.getText());
-							choiceTextField.setText("");
+							notAlreadyTagged = false;
 						}
+					}
+					if (notAlreadyTagged)
+					{
+						currentLibraryFile.tags.add(choiceTextField.getText());
+						choiceTextField.setText("");
+						showTags();
 					}
 				}
 			}
