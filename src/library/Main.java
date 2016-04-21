@@ -30,6 +30,7 @@ public class Main
 	private JList<String> jListLibraryFiles;
 	private LibraryFile currentLibraryFile;
 	private JScrollPane tagScrollPane = new JScrollPane(); 
+	private List<LibraryFile> catalog = new ArrayList<>();	
 	/**************************
 	 **Launch the application**
 	 **************************/
@@ -69,42 +70,11 @@ public class Main
 		frame.setResizable(false);
 		frame.setBounds(100, 100, 600, 472);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		textField ();
+		frame.getContentPane().setLayout(null);
 		splitTagExample ();
 		frame.getContentPane().add(tagScrollPane);
 	}
-	
-	/**************************
-	 ********Text Field********
-	 **************************/
-	private List<LibraryFile> catalog = new ArrayList<>();	
-	private void textField ()
-	{
-		JTextField textField = new JTextField();
 		
-		textField.addActionListener(new AbstractAction() 
-		{
-			private static final long serialVersionUID = 1L;
-			public void actionPerformed(ActionEvent e) 
-			{
-				for (LibraryFile libraryFile : catalog) 
-				{
-					for (String libraryFileTags : libraryFile.tags) 
-					{
-						if (libraryFileTags.compareTo(textField.getText()) == 0)
-						{
-							System.out.println("I did it! " + libraryFile.name + "tagged with: " + libraryFileTags);
-						}
-					}
-				}
-				textField.setText("");
-			}
-		});
-		frame.getContentPane().setLayout(null);
-		textField.setBounds(4, 6, 592, 28);
-		frame.getContentPane().add(textField);
-		textField.setColumns(10);
-	}
 	/**************************
 	 ********Show Tags********
 	 **************************/
@@ -127,7 +97,6 @@ public class Main
 	/**************************
 	 *********Split Tag********
 	 **************************/
-	//Should be as soon as something is tagged it goes away. Things in the viewbox are either showing a list of untagged items, or the tagged items you want.  
 	private void splitTagExample () 
 	{
 		/**************************
@@ -149,13 +118,11 @@ public class Main
 		}
 		
 		catalog.forEach(t -> t.tags.add("Default")); 
-
 				
 		/**************************
 		 ********Split Pane********
 		 **************************/
-		DefaultListModel<String> defaultListLibraryFile = new DefaultListModel<String>(); //change placement.
-		catalog.forEach(f -> defaultListLibraryFile.addElement(f.name));
+		DefaultListModel<String> defaultListLibraryFile = new DefaultListModel<String>();
 		
 		JLabel previewImage = new JLabel();
 		previewImage.setHorizontalAlignment(JLabel.CENTER);
@@ -225,6 +192,35 @@ public class Main
 			}
 		});
 		
+		/**************************
+		 ********Text Field********
+		 **************************/
+		JTextField textField = new JTextField();
+		textField.addActionListener(new AbstractAction() 
+		{
+			private static final long serialVersionUID = 1L;
+			public void actionPerformed(ActionEvent e) 
+			{
+				defaultListLibraryFile.clear();
+				for (LibraryFile libraryFile : catalog) 
+				{
+					for (String libraryFileTags : libraryFile.tags) 
+					{
+						if (libraryFileTags.compareTo(textField.getText()) == 0)
+						{
+							defaultListLibraryFile.addElement(libraryFile.name);
+						}
+					}
+				}
+				textField.setText("");
+			}
+		});
+		textField.setBounds(4, 6, 592, 28);
+		textField.setColumns(10);
+		
+		/**************************
+		 *******Scroll Panes*******
+		 **************************/
 		JScrollPane textScrollPane = new JScrollPane(jListLibraryFiles);
 		textScrollPane.setBounds(20, 189, 300, 179);
 		
@@ -243,6 +239,7 @@ public class Main
 		/**************************
 		 *******Add to Frame*******
 		 **************************/
+		frame.getContentPane().add(textField);
 		frame.getContentPane().add(splitPane);
 	}
 }
