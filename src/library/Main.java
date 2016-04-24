@@ -116,9 +116,8 @@ public class Main
 		{
 			e.printStackTrace();
 		}
-		
 		catalog.forEach(t -> t.tags.add("Default")); 
-				
+		
 		/**************************
 		 ********Split Pane********
 		 **************************/
@@ -150,12 +149,11 @@ public class Main
 						}
 						ImageIcon renderLibraryFile = new ImageIcon(imageIO);
 						previewImage.setIcon(renderLibraryFile);
-						
 					}	
 				}
 			}
 		});
-			
+		
 		/**************************
 		 ******Tag Text Field******
 		 **************************/
