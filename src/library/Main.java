@@ -12,6 +12,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import org.apache.commons.io.FilenameUtils;
 import javax.imageio.ImageIO;
@@ -30,7 +31,8 @@ public class Main
 	private JList<String> jListLibraryFiles;
 	private LibraryFile currentLibraryFile;
 	private JScrollPane tagScrollPane = new JScrollPane(); 
-	private List<LibraryFile> catalog = new ArrayList<>();	
+	private List<LibraryFile> catalog = new ArrayList<LibraryFile>();	
+	
 	/**************************
 	 **Launch the application**
 	 **************************/
@@ -81,10 +83,20 @@ public class Main
 	private void showTags()
 	{
 	   JPanel listOfTags = new JPanel(new GridLayout(1,0));
-	   for (int i = 0; i < currentLibraryFile.tags.size(); i++)
+	   
+	   for (String tag : currentLibraryFile.tags) 
 	   {
-		   JTextField tag = new JTextField(currentLibraryFile.tags.get(i));
-		   listOfTags.add(tag);
+		   JTextField jFieldTag = new JTextField(tag);
+		   jFieldTag.addActionListener(new ActionListener() 
+		   {
+				public void actionPerformed(ActionEvent e) 
+				{
+					currentLibraryFile.tags.remove(tag);
+					currentLibraryFile.tags.add(jFieldTag.getText());
+					jFieldTag.setFocusable(false);
+				}
+		   });
+		   listOfTags.add(jFieldTag); 
 	   }
 	   	frame.remove(tagScrollPane);
 	    tagScrollPane = new JScrollPane(listOfTags);
