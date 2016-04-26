@@ -60,14 +60,6 @@ public class Main
 	 **************************/
 	public Main() 
 	{
-		initialize();
-	}
-
-	/**************************
-	 **Initialize Application**
-	 **************************/
-	private void initialize() 
-	{
 		frame = new JFrame();
 		frame.setResizable(false);
 		frame.setBounds(100, 100, 600, 472);
