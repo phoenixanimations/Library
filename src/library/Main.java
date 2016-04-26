@@ -44,8 +44,7 @@ public class Main
 			{
 				try 
 				{
-					Main window = new Main();
-					window.frame.setVisible(true);
+					new Main();
 				} 
 				catch (Exception e) 
 				{
@@ -61,6 +60,7 @@ public class Main
 	public Main() 
 	{
 		frame = new JFrame();
+		frame.setVisible(true);
 		frame.setResizable(false);
 		frame.setBounds(100, 100, 600, 472);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
