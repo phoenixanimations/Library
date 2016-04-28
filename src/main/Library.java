@@ -27,18 +27,14 @@ import java.awt.TextField;
 import javax.swing.JSplitPane;
 
 import library.File.LibraryFile;
-import library.ImageLoader.LibraryImagePane;
-import library.TextField.LibraryAddTags;
+import library.TextField.LibrarySearchBar;
 import library.TextScrollPane.LibraryTextScrollPane;
 
 
 public class Library 
 {
 	private JFrame frame;
-	private JList<String> jListLibraryFiles;
-	private LibraryFile currentLibraryFile;
-	private JScrollPane tagScrollPane = new JScrollPane(); 
-	private List<LibraryFile> catalog = new ArrayList<LibraryFile>();	
+	private List<LibraryFile> catalog = new ArrayList<LibraryFile>();
 	
 	/**************************
 	 **Launch the application**
@@ -72,43 +68,14 @@ public class Library
 		frame.setBounds(100, 100, 600, 472);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		splitTagExample ();
-		frame.getContentPane().add(tagScrollPane);
+		compileLibrary ();
 	}
 		
-	/**************************
-	 ********Show Tags********
-	 **************************/
-	private void showTags()
-	{
-	   JPanel listOfTags = new JPanel(new GridLayout(1,0));
-	   
-	   for (String tag : currentLibraryFile.tags) 
-	   {
-		   JTextField jFieldTag = new JTextField(tag);
-		   jFieldTag.addActionListener(new ActionListener() 
-		   {
-				public void actionPerformed(ActionEvent e) 
-				{
-					currentLibraryFile.tags.remove(tag);
-					currentLibraryFile.tags.add(jFieldTag.getText());
-					jFieldTag.setFocusable(false);
-				}
-		   });
-		   listOfTags.add(jFieldTag); 
-	   }
-//	   	frame.remove(tagScrollPane);
-	    tagScrollPane = new JScrollPane(listOfTags);
-//	    frame.getContentPane().add(tagScrollPane);
-//		tagScrollPane.setBounds(6, 44, 588, 48);
-//		tagScrollPane.repaint();
-//		tagScrollPane.revalidate();
-	}
 	
 	/**************************
-	 *********Split Tag********
+	 ******Compile Library*****
 	 **************************/
-	private void splitTagExample () 
+	private void compileLibrary () 
 	{
 		/**************************
 		 ******Catalog Files*******
@@ -130,112 +97,18 @@ public class Library
 		catalog.forEach(t -> t.tags.add("Default")); 
 		
 		/**************************
-		 ********Split Pane********
-		 **************************/
-		DefaultListModel<String> defaultListLibraryFile = new DefaultListModel<String>();
-		
-		JLabel previewImage = new JLabel();
-		previewImage.setHorizontalAlignment(JLabel.CENTER);
-		
-		jListLibraryFiles = new JList<String>(defaultListLibraryFile);
-		jListLibraryFiles.addListSelectionListener(new ListSelectionListener() 
-		{	
-			public void valueChanged(ListSelectionEvent e) 
-			{
-				for (LibraryFile libraryFile : catalog) 
-				{
-					if (libraryFile.name.equals(jListLibraryFiles.getSelectedValue()))
-					{
-						currentLibraryFile = libraryFile;
-						showTags();
-						
-						BufferedImage imageIO = null;
-						try
-						{
-							imageIO = ImageIO.read(libraryFile.file);
-						}
-						catch (Exception exception)
-						{
-							exception.printStackTrace();
-						}
-						ImageIcon renderLibraryFile = new ImageIcon(imageIO);
-						previewImage.setIcon(renderLibraryFile);
-					}	
-				}
-			}
-		});
-		
-		/**************************
-		 ******Tag Text Field******
-		 **************************/
-		TextField choiceTextField = new TextField();
-		choiceTextField.setBounds(139, 40, 132, 27);
-		choiceTextField.addActionListener(new AbstractAction() 
-		{
-			private static final long serialVersionUID = 2L;
-			public void actionPerformed(ActionEvent e) 
-			{
-				if (currentLibraryFile == null)
-				{
-					choiceTextField.getText();
-					choiceTextField.setText("");
-					return;
-				}
-				if (choiceTextField.getText().equals("") == false)
-				{
-					Boolean notAlreadyTagged = true;
-					for (String tag : currentLibraryFile.tags) 
-					{
-						if (tag.equals(choiceTextField.getText()))
-						{
-							notAlreadyTagged = false;
-						}
-					}
-					if (notAlreadyTagged)
-					{
-						currentLibraryFile.tags.add(choiceTextField.getText());
-						choiceTextField.setText("");
-						showTags();
-					}
-				}
-			}
-		});
-	
-		/**************************
-		 ********Text Field********
-		 **************************/
-		
-		/**************************
-		 *******Scroll Panes*******
-		 **************************/
-		JScrollPane textScrollPane = new JScrollPane(jListLibraryFiles);
-		textScrollPane.setBounds(20, 189, 300, 179);
-		
-		JScrollPane imageScrollPane = new JScrollPane(previewImage);
-		imageScrollPane.setBounds(20, 189, 300, 179);
-		
-		JSplitPane imageAndTagPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT,previewImage,choiceTextField);
-		imageAndTagPane.setDividerLocation(310);
-		imageAndTagPane.setEnabled(false);
-		
-		JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,textScrollPane,imageAndTagPane);
-		splitPane.setSize(588, 350);
-		splitPane.setLocation(6, 94);
-		splitPane.setDividerLocation(260);
-		
-		/**************************
 		 *******Add to Frame*******
 		 **************************/
-//		LibrarySearchBar librarySearchBar = new LibrarySearchBar();
+//		LibrarySearchBar librarySearchBar = new LibrarySearchBar(catalog);
 //		LibraryShowTags libraryShowTags = new LibraryShowTags(catalog.get(0));
 //		LibraryAddTags libraryAddTags = new LibraryAddTags(catalog.get(0));
 //		LibraryImagePane libraryImagePane = new LibraryImagePane(catalog.get(0).file.getPath());
-		LibraryTextScrollPane libraryTextScrollPane = new LibraryTextScrollPane(catalog);
+//		LibraryTextScrollPane libraryTextScrollPane = new LibraryTextScrollPane(catalog);
 		
 //		frame.getContentPane().add(librarySearchBar);
 //		frame.getContentPane().add(libraryShowTags);
 //		frame.getContentPane().add(libraryAddTags);
 //		frame.getContentPane().add(libraryImagePane);
-		frame.getContentPane().add(libraryTextScrollPane);
+//		frame.getContentPane().add(libraryTextScrollPane);
 	}
 }
