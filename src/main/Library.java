@@ -26,7 +26,9 @@ import javax.swing.event.ListSelectionListener;
 import java.awt.TextField;
 import javax.swing.JSplitPane;
 import library.*;
-import library.TextField.LibrarySearch;
+import library.TextField.LibraryShowTags;
+import library.TextField.LibraryAddTags;
+import library.TextField.LibrarySearchBar;
 
 
 public class Library 
@@ -201,7 +203,6 @@ public class Library
 		/**************************
 		 ********Text Field********
 		 **************************/
-		LibrarySearch librarySearchBar = new LibrarySearch();
 		
 		/**************************
 		 *******Scroll Panes*******
@@ -224,7 +225,15 @@ public class Library
 		/**************************
 		 *******Add to Frame*******
 		 **************************/
+		LibrarySearchBar librarySearchBar = new LibrarySearchBar();
+		LibraryShowTags libraryShowTags = new LibraryShowTags();
+		LibraryAddTags libraryAddTags = new LibraryAddTags();
+		
 		frame.getContentPane().add(librarySearchBar);
-		frame.getContentPane().add(splitPane);
+		frame.getContentPane().add(libraryShowTags);
+		frame.getContentPane().add(libraryAddTags);
+//		frame.getContentPane().add(splitPane);
+//		frame.getContentPane().add(splitPane);
+//		frame.getContentPane().add(splitPane);
 	}
 }

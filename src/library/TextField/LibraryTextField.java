@@ -7,6 +7,7 @@ import javax.swing.JTextField;
 public class LibraryTextField extends JTextField
 {
 	private static final long serialVersionUID = 4447203274975665232L;
+	private String lastString = new String("");
 	
 	public LibraryTextField ()
 	{
@@ -16,13 +17,18 @@ public class LibraryTextField extends JTextField
 			public void actionPerformed(ActionEvent e) 
 			{
 				onActionListener ();
-				setText("");
 			}
 		});	
 	}
 	
-	public void onActionListener ()
+	protected void onActionListener ()
 	{
-		
+		lastString = getText();
+		setText("");
+	}
+	
+	public String getLastString ()
+	{
+		return lastString;
 	}
 }
