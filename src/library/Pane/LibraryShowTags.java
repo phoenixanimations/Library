@@ -25,16 +25,42 @@ public class LibraryShowTags extends JScrollPane
 				@Override
 				public void actionPerformed(ActionEvent e) 
 				{
-					System.out.println(libraryFile.name);
 					libraryFile.tags.remove(tag);
 					libraryFile.tags.add(jFieldTag.getText());
 					jFieldTag.setFocusable(false);
 					jFieldTag.setFocusable(true);
 				}
 			});
-			listOfTags.add(jFieldTag);
-			setViewportView(listOfTags);
+			listOfTags.add(jFieldTag);			
 		}
+		JTextField jFieldNewTag = new JTextField();
+		jFieldNewTag.addActionListener(new ActionListener() 
+		{
+			@Override
+			public void actionPerformed(ActionEvent e) 
+			{
+				Boolean duplicateTag = false;
+				for (String tag : libraryFile.tags) 
+				{
+					if (tag.equals(jFieldNewTag.getText()))
+					{
+						duplicateTag = true;
+					}
+				}
+				
+				if (!jFieldNewTag.getText().equals("") && !duplicateTag)
+				{
+					libraryFile.tags.add(jFieldNewTag.getText());
+					show(libraryFile);
+				}
+				else 
+				{
+					jFieldNewTag.setText("");
+				}
+			}
+		});
+		listOfTags.add(jFieldNewTag);
+		setViewportView(listOfTags);
 	}
 	
 	public LibraryShowTags ()

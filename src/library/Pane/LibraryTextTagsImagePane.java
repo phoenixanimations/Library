@@ -33,7 +33,7 @@ public class LibraryTextTagsImagePane extends JSplitPane
 		});
 		
 		JSplitPane imageTags = new JSplitPane(JSplitPane.VERTICAL_SPLIT,image,tags);
-		imageTags.setDividerLocation(300);
+		imageTags.setDividerLocation(290);
 		setLeftComponent(scroll);
 		setRightComponent(imageTags);
 		setBounds(6, 94, 588, 350);
