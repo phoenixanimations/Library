@@ -25,10 +25,9 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.TextField;
 import javax.swing.JSplitPane;
-import library.*;
-import library.TextField.LibraryShowTags;
+import library.LibraryFile;
+import library.ImageLoader.LibraryImagePane;
 import library.TextField.LibraryAddTags;
-import library.TextField.LibrarySearchBar;
 
 
 public class Library 
@@ -227,10 +226,12 @@ public class Library
 		 **************************/
 //		LibrarySearchBar librarySearchBar = new LibrarySearchBar();
 //		LibraryShowTags libraryShowTags = new LibraryShowTags(catalog.get(0));
-		LibraryAddTags libraryAddTags = new LibraryAddTags(catalog.get(0));
+//		LibraryAddTags libraryAddTags = new LibraryAddTags(catalog.get(0));
+		LibraryImagePane libraryImagePane = new LibraryImagePane(catalog.get(0).file.getPath());
 		
 //		frame.getContentPane().add(librarySearchBar);
 //		frame.getContentPane().add(libraryShowTags);
-		frame.getContentPane().add(libraryAddTags);
+//		frame.getContentPane().add(libraryAddTags);
+		frame.getContentPane().add(libraryImagePane);
 	}
 }
