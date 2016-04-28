@@ -7,7 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
-import library.LibraryFile;
+import library.File.LibraryFile;
 
 public class LibraryShowTags extends JScrollPane
 {

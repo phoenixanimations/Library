@@ -2,7 +2,8 @@ package library.TextField;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import library.LibraryFile;
+
+import library.File.LibraryFile;
 
 public class LibraryAddTags extends LibraryTextField 
 {

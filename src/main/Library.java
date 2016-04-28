@@ -25,9 +25,11 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.TextField;
 import javax.swing.JSplitPane;
-import library.LibraryFile;
+
+import library.File.LibraryFile;
 import library.ImageLoader.LibraryImagePane;
 import library.TextField.LibraryAddTags;
+import library.TextScrollPane.LibraryTextScrollPane;
 
 
 public class Library 
@@ -227,11 +229,13 @@ public class Library
 //		LibrarySearchBar librarySearchBar = new LibrarySearchBar();
 //		LibraryShowTags libraryShowTags = new LibraryShowTags(catalog.get(0));
 //		LibraryAddTags libraryAddTags = new LibraryAddTags(catalog.get(0));
-		LibraryImagePane libraryImagePane = new LibraryImagePane(catalog.get(0).file.getPath());
+//		LibraryImagePane libraryImagePane = new LibraryImagePane(catalog.get(0).file.getPath());
+		LibraryTextScrollPane libraryTextScrollPane = new LibraryTextScrollPane(catalog);
 		
 //		frame.getContentPane().add(librarySearchBar);
 //		frame.getContentPane().add(libraryShowTags);
 //		frame.getContentPane().add(libraryAddTags);
-		frame.getContentPane().add(libraryImagePane);
+//		frame.getContentPane().add(libraryImagePane);
+		frame.getContentPane().add(libraryTextScrollPane);
 	}
 }
