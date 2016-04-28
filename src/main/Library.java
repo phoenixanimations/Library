@@ -96,12 +96,12 @@ public class Library
 		   });
 		   listOfTags.add(jFieldTag); 
 	   }
-	   	frame.remove(tagScrollPane);
+//	   	frame.remove(tagScrollPane);
 	    tagScrollPane = new JScrollPane(listOfTags);
-	    frame.getContentPane().add(tagScrollPane);
-		tagScrollPane.setBounds(6, 44, 588, 48);
-		tagScrollPane.repaint();
-		tagScrollPane.revalidate();
+//	    frame.getContentPane().add(tagScrollPane);
+//		tagScrollPane.setBounds(6, 44, 588, 48);
+//		tagScrollPane.repaint();
+//		tagScrollPane.revalidate();
 	}
 	
 	/**************************
@@ -225,15 +225,12 @@ public class Library
 		/**************************
 		 *******Add to Frame*******
 		 **************************/
-		LibrarySearchBar librarySearchBar = new LibrarySearchBar();
-		LibraryShowTags libraryShowTags = new LibraryShowTags();
-		LibraryAddTags libraryAddTags = new LibraryAddTags();
+//		LibrarySearchBar librarySearchBar = new LibrarySearchBar();
+		LibraryShowTags libraryShowTags = new LibraryShowTags(catalog.get(0));
+//		LibraryAddTags libraryAddTags = new LibraryAddTags();
 		
-		frame.getContentPane().add(librarySearchBar);
+//		frame.getContentPane().add(librarySearchBar);
 		frame.getContentPane().add(libraryShowTags);
-		frame.getContentPane().add(libraryAddTags);
-//		frame.getContentPane().add(splitPane);
-//		frame.getContentPane().add(splitPane);
-//		frame.getContentPane().add(splitPane);
+//		frame.getContentPane().add(libraryAddTags);
 	}
 }
