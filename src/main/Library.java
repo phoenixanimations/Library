@@ -226,11 +226,11 @@ public class Library
 		 *******Add to Frame*******
 		 **************************/
 //		LibrarySearchBar librarySearchBar = new LibrarySearchBar();
-		LibraryShowTags libraryShowTags = new LibraryShowTags(catalog.get(0));
-//		LibraryAddTags libraryAddTags = new LibraryAddTags();
+//		LibraryShowTags libraryShowTags = new LibraryShowTags(catalog.get(0));
+		LibraryAddTags libraryAddTags = new LibraryAddTags(catalog.get(0));
 		
 //		frame.getContentPane().add(librarySearchBar);
-		frame.getContentPane().add(libraryShowTags);
-//		frame.getContentPane().add(libraryAddTags);
+//		frame.getContentPane().add(libraryShowTags);
+		frame.getContentPane().add(libraryAddTags);
 	}
 }
