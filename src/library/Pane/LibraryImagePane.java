@@ -7,7 +7,7 @@ public class LibraryImagePane extends JScrollPane
 {
 	private static final long serialVersionUID = 5085259721822268968L;
 	public JLabel labelImage = new JLabel();
-	public LibraryImagePane ()//LibraryFile temporary
+	public LibraryImagePane ()
 	{
 		setViewportView(labelImage);
 		setBounds(20, 189, 300, 179);

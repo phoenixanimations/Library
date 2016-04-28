@@ -12,7 +12,9 @@ import library.File.LibraryFile;
 public class LibraryShowTags extends JScrollPane
 {
 	private static final long serialVersionUID = -3942540669852789051L;
-	private static JPanel createListOfTags (LibraryFile libraryFile)
+	public LibraryFile libraryFile;
+		
+	public void show (LibraryFile libraryFile)
 	{
 		JPanel listOfTags = new JPanel(new GridLayout(1, 0));
 		for (String tag : libraryFile.tags)
@@ -23,19 +25,21 @@ public class LibraryShowTags extends JScrollPane
 				@Override
 				public void actionPerformed(ActionEvent e) 
 				{
+					System.out.println(libraryFile.name);
 					libraryFile.tags.remove(tag);
 					libraryFile.tags.add(jFieldTag.getText());
-					jFieldTag.transferFocus();
+					jFieldTag.setFocusable(false);
+					jFieldTag.setFocusable(true);
 				}
 			});
 			listOfTags.add(jFieldTag);
+			setViewportView(listOfTags);
 		}
-		return listOfTags;
 	}
 	
-	public LibraryShowTags (LibraryFile libraryFile)
+	public LibraryShowTags ()
 	{
-		super(createListOfTags(libraryFile));
+		super();
 		setBounds(6, 44, 588, 48);
 	}
 }
