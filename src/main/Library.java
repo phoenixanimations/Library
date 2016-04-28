@@ -27,7 +27,8 @@ import java.awt.TextField;
 import javax.swing.JSplitPane;
 
 import library.File.LibraryFile;
-import library.ScrollPane.LibraryTextScrollPane;
+import library.Pane.LibraryTextScrollPane;
+import library.Pane.LibraryTextTagsImagePane;
 import library.TextField.LibrarySearchBar;
 
 
@@ -88,7 +89,7 @@ public class Library
 					  	   	  e.toString().toLowerCase().contains(".jpg") ||
 					  	   	  e.toString().toLowerCase().contains(".png") ||
 					  	   	  e.toString().toLowerCase().contains(".tiff"))
-				 .forEach(e -> catalog.add(new LibraryFile(FilenameUtils.getBaseName(e.toString()), e.toFile())));
+				 .forEach(e -> catalog.add(new LibraryFile(FilenameUtils.getBaseName(e.toString()), e.toString(), FilenameUtils.getExtension(e.toString()))));
 		}
 		catch (IOException e)
 		{
@@ -99,16 +100,18 @@ public class Library
 		/**************************
 		 *******Add to Frame*******
 		 **************************/
-		LibrarySearchBar librarySearchBar = new LibrarySearchBar(catalog);
+//		LibrarySearchBar librarySearchBar = new LibrarySearchBar(catalog);
 //		LibraryShowTags libraryShowTags = new LibraryShowTags(catalog.get(0));
 //		LibraryAddTags libraryAddTags = new LibraryAddTags(catalog.get(0));
 //		LibraryImagePane libraryImagePane = new LibraryImagePane(catalog.get(0).file.getPath());
 //		LibraryTextScrollPane libraryTextScrollPane = new LibraryTextScrollPane(catalog);
+		LibraryTextTagsImagePane libraryTextTagsImagePane = new LibraryTextTagsImagePane(catalog);
 		
-		frame.getContentPane().add(librarySearchBar);
+//		frame.getContentPane().add(librarySearchBar);
 //		frame.getContentPane().add(libraryShowTags);
 //		frame.getContentPane().add(libraryAddTags);
 //		frame.getContentPane().add(libraryImagePane);
 //		frame.getContentPane().add(libraryTextScrollPane);
+		frame.getContentPane().add(libraryTextTagsImagePane);
 	}
 }

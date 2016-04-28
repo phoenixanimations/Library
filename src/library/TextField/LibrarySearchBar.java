@@ -35,7 +35,7 @@ public class LibrarySearchBar extends LibraryTextField
 		{
 			for (String tag : libraryFile.tags)
 			{
-				if (tag.equals(getLastString()))
+				if (tag.equals(getLastString()) && !getLastString().equals(""))
 				{
 					sortedCatalog.add(libraryFile);
 				}
