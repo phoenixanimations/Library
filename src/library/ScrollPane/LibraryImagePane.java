@@ -1,4 +1,4 @@
-package library.ImageLoader;
+package library.ScrollPane;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;

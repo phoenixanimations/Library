@@ -1,4 +1,4 @@
-package library.TextScrollPane;
+package library.ScrollPane;
 
 import java.util.List;
 

@@ -27,8 +27,8 @@ import java.awt.TextField;
 import javax.swing.JSplitPane;
 
 import library.File.LibraryFile;
+import library.ScrollPane.LibraryTextScrollPane;
 import library.TextField.LibrarySearchBar;
-import library.TextScrollPane.LibraryTextScrollPane;
 
 
 public class Library 
@@ -99,13 +99,13 @@ public class Library
 		/**************************
 		 *******Add to Frame*******
 		 **************************/
-//		LibrarySearchBar librarySearchBar = new LibrarySearchBar(catalog);
+		LibrarySearchBar librarySearchBar = new LibrarySearchBar(catalog);
 //		LibraryShowTags libraryShowTags = new LibraryShowTags(catalog.get(0));
 //		LibraryAddTags libraryAddTags = new LibraryAddTags(catalog.get(0));
 //		LibraryImagePane libraryImagePane = new LibraryImagePane(catalog.get(0).file.getPath());
 //		LibraryTextScrollPane libraryTextScrollPane = new LibraryTextScrollPane(catalog);
 		
-//		frame.getContentPane().add(librarySearchBar);
+		frame.getContentPane().add(librarySearchBar);
 //		frame.getContentPane().add(libraryShowTags);
 //		frame.getContentPane().add(libraryAddTags);
 //		frame.getContentPane().add(libraryImagePane);
