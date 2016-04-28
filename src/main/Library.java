@@ -1,4 +1,4 @@
-package library;
+package main;
 import java.awt.EventQueue;
 import java.awt.GridLayout;
 import javax.swing.JFrame;
@@ -15,6 +15,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import org.apache.commons.io.FilenameUtils;
+
 import javax.imageio.ImageIO;
 import javax.swing.AbstractAction;
 import javax.swing.DefaultListModel;
@@ -24,8 +25,11 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.TextField;
 import javax.swing.JSplitPane;
+import library.*;
+import library.TextField.LibrarySearch;
 
-public class Main 
+
+public class Library 
 {
 	private JFrame frame;
 	private JList<String> jListLibraryFiles;
@@ -44,7 +48,7 @@ public class Main
 			{
 				try 
 				{
-					new Main();
+					new Library();
 				} 
 				catch (Exception e) 
 				{
@@ -57,7 +61,7 @@ public class Main
 	/**************************
 	 **Create the application**
 	 **************************/
-	public Main() 
+	public Library() 
 	{
 		frame = new JFrame();
 		frame.setVisible(true);
@@ -193,32 +197,11 @@ public class Main
 				}
 			}
 		});
-		
+	
 		/**************************
 		 ********Text Field********
 		 **************************/
-		JTextField textField = new JTextField();
-		textField.addActionListener(new AbstractAction() 
-		{
-			private static final long serialVersionUID = 1L;
-			public void actionPerformed(ActionEvent e) 
-			{
-				defaultListLibraryFile.clear();
-				for (LibraryFile libraryFile : catalog) 
-				{
-					for (String libraryFileTags : libraryFile.tags) 
-					{
-						if (libraryFileTags.compareTo(textField.getText()) == 0)
-						{
-							defaultListLibraryFile.addElement(libraryFile.name);
-						}
-					}
-				}
-				textField.setText("");
-			}
-		});
-		textField.setBounds(4, 6, 592, 28);
-		textField.setColumns(10);
+		LibrarySearch librarySearchBar = new LibrarySearch();
 		
 		/**************************
 		 *******Scroll Panes*******
@@ -241,7 +224,7 @@ public class Main
 		/**************************
 		 *******Add to Frame*******
 		 **************************/
-		frame.getContentPane().add(textField);
+		frame.getContentPane().add(librarySearchBar);
 		frame.getContentPane().add(splitPane);
 	}
 }

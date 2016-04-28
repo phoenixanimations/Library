@@ -14,3 +14,11 @@ public class LibraryFile
 		file = assignFile;
 	}
 }
+
+/*
+	For the future: 
+	public String name;
+	public String path;
+	public String extension;
+	public List<String> tags = new ArrayList<>();
+*/
