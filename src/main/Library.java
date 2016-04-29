@@ -1,36 +1,16 @@
 package main;
 import java.awt.EventQueue;
-import java.awt.GridLayout;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
+
 import org.apache.commons.io.FilenameUtils;
 
-import javax.imageio.ImageIO;
-import javax.swing.AbstractAction;
-import javax.swing.DefaultListModel;
-import javax.swing.ImageIcon;
-import javax.swing.JTextField;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-import java.awt.TextField;
-import javax.swing.JSplitPane;
-
 import library.File.LibraryFile;
-import library.Pane.LibraryShowTags;
-import library.Pane.LibraryTextScrollPane;
 import library.Pane.LibraryTextTagsImagePane;
-import library.TextField.LibrarySearchBar;
 
 
 public class Library 
@@ -66,10 +46,8 @@ public class Library
 	{
 		frame = new JFrame();
 		frame.setVisible(true);
-		frame.setResizable(false);
 		frame.setBounds(100, 100, 600, 472);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
 		compileLibrary ();
 	}
 		
@@ -101,19 +79,7 @@ public class Library
 		/**************************
 		 *******Add to Frame*******
 		 **************************/
-//		LibrarySearchBar librarySearchBar = new LibrarySearchBar(catalog);
-//		LibraryAddTags libraryAddTags = new LibraryAddTags(catalog.get(0));
-//		LibraryImagePane libraryImagePane = new LibraryImagePane(catalog.get(0).file.getPath());
-//		LibraryTextScrollPane libraryTextScrollPane = new LibraryTextScrollPane(catalog);
-//		libraryTextTagsImagePane.selectedLibraryFile
-//		frame.getContentPane().add(librarySearchBar);
-//		frame.getContentPane().add(libraryAddTags);
-//		frame.getContentPane().add(libraryImagePane);
-//		frame.getContentPane().add(libraryTextScrollPane);
-		
 		LibraryTextTagsImagePane libraryTextTagsImagePane = new LibraryTextTagsImagePane(catalog);
-		frame.getContentPane().add(libraryTextTagsImagePane);
-		
-		
+		frame.getContentPane().add(libraryTextTagsImagePane);		
 	}
 }

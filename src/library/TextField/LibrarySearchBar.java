@@ -12,22 +12,13 @@ public class LibrarySearchBar extends LibraryTextField
 	private static final long serialVersionUID = -481221882331525417L;
 	private List<LibraryFile> sortedCatalog = new ArrayList<LibraryFile>();
 
-	public LibrarySearchBar (List<LibraryFile> catalog)
-	{
-		addActionListener(new ActionListener() 
-		{
-			@Override
-			public void actionPerformed(ActionEvent e) 
-			{
-				onActionListener(catalog);
-			}
-		});
-		
+	public LibrarySearchBar ()
+	{	
 		setBounds(4, 6, 592, 28);
 		setColumns(10);
 	}
 	
-	protected void onActionListener (List<LibraryFile> catalog)
+	public void onActionListener (List<LibraryFile> catalog)
 	{
 		onActionListener();
 		sortedCatalog.clear();
