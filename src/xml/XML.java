@@ -10,6 +10,7 @@ import java.util.concurrent.atomic.*;
 import org.apache.commons.io.FilenameUtils;
 import org.jdom2.Document;
 import org.jdom2.Element;
+import org.jdom2.filter.Filter;
 import org.jdom2.input.SAXBuilder;
 import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
@@ -66,7 +67,8 @@ public class XML
 		 	e.printStackTrace();
 		 }
 		 doc.getChildren().forEach(c -> catalog.add(new LibraryFile(Integer.parseInt(c.getChildText("id")),c.getChildText("name"), c.getChildText("path"), c.getChildText("extension"))));  
-		 addTag (catalog.get(0).id, "Hello");
+//		 addTag (catalog.get(0).id, "Hello");
+//		 removeTag (catalog.get(0).id, "Hello");
     }
 	
 	private void saveXML ()
@@ -96,8 +98,8 @@ public class XML
 	
 	public void removeTag (int id, String tag)
 	{
-		catalog.get(id).tags.remove(tag);
-		doc.getChildren().get(id).getChild("tags").removeAttribute(tag);
+//		catalog.get(id).tags.remove(tag);
+		doc.getChildren().get(id).getChild("tags").removeChild(tag);
 		saveXML();
 	}
 }
