@@ -9,9 +9,22 @@ import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
 
 public class XML 
-{	
-    public XML ()
+{
+	public XML ()
     {
+		//Create XML file 
+    	//try to find the xml file if you can't create a new one.
+		//load xml
+		
+		    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
     	 try 
          {
          	Element root = new Element("CONFIGURATION");
