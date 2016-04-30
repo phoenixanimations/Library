@@ -14,16 +14,14 @@ import org.jdom2.input.SAXBuilder;
 import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
 
-import com.sun.xml.internal.org.jvnet.fastinfoset.VocabularyApplicationData;
-
 import library.File.LibraryFile;
-import sun.launcher.resources.launcher;
+
 
 public class XML 
 {
-	
 	private Element doc;
 	private List<LibraryFile> catalog = new ArrayList<LibraryFile>();
+	private XMLOutputter outputter;
 	
 	public static void main (String[] args)
 	{
@@ -62,13 +60,10 @@ public class XML
 				 		 				i.getAndIncrement();
 					 			   });
 				createDocument.setRootElement(root);
-			 	XMLOutputter outputter = new XMLOutputter();
+			 	outputter = new XMLOutputter();
 			 	outputter.setFormat(Format.getPrettyFormat());
 			 	outputter.output(createDocument, new FileWriter(new File("data.xml")));
 			 	doc = (Element) new SAXBuilder().build(new File("data.xml")).getRootElement();
-//			 	doc.getChildren().get(0).getChild("tags").addContent("hi");
-			 	//Find out the correct way XML save/loading.
-			 	
 			}
 		 }		 
 		 catch (Exception e) 
@@ -77,23 +72,37 @@ public class XML
 		 }
 		 doc.getChildren().forEach(c -> catalog.add(new LibraryFile(Integer.parseInt(c.getChildText("id")),c.getChildText("name"), c.getChildText("path"), c.getChildText("extension"))));  
 		 
-		 
+		 addTag(catalog.get(0).id, "hi");
     }
+	
+	private void saveXML ()
+	{
+		try 
+		{
+			outputter.output(doc, new FileWriter(new File("data.xml")));
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
+	public List<LibraryFile> getCatalog ()
+	{
+		return catalog;
+	}
 	
 	public void addTag (int id, String tag)
 	{
 		catalog.get(id).tags.add(tag);
 		doc.getChildren().get(id).getChild("tags").addContent(tag);
+		saveXML();
 	}
 	
 	public void removeTag (int id, String tag)
 	{
 		catalog.get(id).tags.remove(tag);
 		doc.getChildren().get(id).getChild("tags").removeChild(tag);
-	}
-	
-	public List<LibraryFile> getCatalog ()
-	{
-		return catalog;
+		saveXML();
 	}
 }
