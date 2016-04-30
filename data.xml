@@ -1,69 +1,80 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <DATABASE>
   <image0>
+    <id>0</id>
     <name>28df482d00d116b82d6530407423d29d</name>
     <path>./img/artists.pixelovely.com/28df482d00d116b82d6530407423d29d.jpg</path>
     <extension>jpg</extension>
-    <tags />
+    <tags>Default</tags>
   </image0>
   <image1>
+    <id>1</id>
     <name>406b46b2b83ab20a3dffe8990fa82b3e</name>
     <path>./img/artists.pixelovely.com/406b46b2b83ab20a3dffe8990fa82b3e.jpg</path>
     <extension>jpg</extension>
-    <tags />
+    <tags>Default</tags>
   </image1>
   <image2>
+    <id>2</id>
     <name>439289cd2903dfd773137d515f8bfaa3</name>
     <path>./img/artists.pixelovely.com/439289cd2903dfd773137d515f8bfaa3.jpg</path>
     <extension>jpg</extension>
-    <tags />
+    <tags>Default</tags>
   </image2>
   <image3>
+    <id>3</id>
     <name>551726ca626c766077b54c7e8bbfb8ea</name>
     <path>./img/artists.pixelovely.com/551726ca626c766077b54c7e8bbfb8ea.jpg</path>
     <extension>jpg</extension>
-    <tags />
+    <tags>Default</tags>
   </image3>
   <image4>
+    <id>4</id>
     <name>6e5b1ccc95db92b63325dd6b4a334e4d</name>
     <path>./img/artists.pixelovely.com/6e5b1ccc95db92b63325dd6b4a334e4d.jpg</path>
     <extension>jpg</extension>
-    <tags />
+    <tags>Default</tags>
   </image4>
   <image5>
+    <id>5</id>
     <name>9b6a0ab90a60da0b2d630c5561c27413</name>
     <path>./img/artists.pixelovely.com/9b6a0ab90a60da0b2d630c5561c27413.jpg</path>
     <extension>jpg</extension>
-    <tags />
+    <tags>Default</tags>
   </image5>
   <image6>
+    <id>6</id>
     <name>bd85620d8943cc9246df8bb29566d8ce</name>
     <path>./img/artists.pixelovely.com/bd85620d8943cc9246df8bb29566d8ce.jpg</path>
     <extension>jpg</extension>
-    <tags />
+    <tags>Default</tags>
   </image6>
   <image7>
+    <id>7</id>
     <name>ca2bf0024fb1d00f6801d532606e3b77</name>
     <path>./img/artists.pixelovely.com/ca2bf0024fb1d00f6801d532606e3b77.jpg</path>
     <extension>jpg</extension>
-    <tags />
+    <tags>Default</tags>
   </image7>
   <image8>
+    <id>8</id>
     <name>figure-18-1305231649</name>
     <path>./img/artists.pixelovely.com/figure-18-1305231649.jpg</path>
     <extension>jpg</extension>
-    <tags />
+    <tags>Default</tags>
   </image8>
   <image9>
+    <id>9</id>
     <name>figure-3-1303869903</name>
     <path>./img/artists.pixelovely.com/figure-3-1303869903.jpg</path>
     <extension>jpg</extension>
-    <tags />
+    <tags>Default</tags>
   </image9>
   <image10>
+    <id>10</id>
     <name>Punch Kick Handstand</name>
     <path>./img/artists.pixelovely.com/Punch Kick Handstand.jpg</path>
     <extension>jpg</extension>
-    <tags />
+    <tags>Default</tags>
   </image10>
 </DATABASE>

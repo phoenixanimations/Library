@@ -60,26 +60,26 @@ public class Library
 		/**************************
 		 ******Catalog Files*******
 		 **************************/
-		try
-		{
-			Files.walk(Paths.get("./img"))
-				 .filter(Files::isRegularFile)
-				 .filter(e -> e.toString().toLowerCase().contains(".jpeg") || 
-					  	   	  e.toString().toLowerCase().contains(".jpg") ||
-					  	   	  e.toString().toLowerCase().contains(".png") ||
-					  	   	  e.toString().toLowerCase().contains(".tiff"))
-				 .forEach(e -> catalog.add(new LibraryFile(FilenameUtils.getBaseName(e.toString()), e.toString(), FilenameUtils.getExtension(e.toString()))));
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
-		catalog.forEach(t -> t.tags.add("Default")); 
+//		try
+//		{
+//			Files.walk(Paths.get("./img"))
+//				 .filter(Files::isRegularFile)
+//				 .filter(e -> e.toString().toLowerCase().contains(".jpeg") || 
+//					  	   	  e.toString().toLowerCase().contains(".jpg") ||
+//					  	   	  e.toString().toLowerCase().contains(".png") ||
+//					  	   	  e.toString().toLowerCase().contains(".tiff"))
+//				 .forEach(e -> catalog.add(new LibraryFile(FilenameUtils.getBaseName(e.toString()), e.toString(), FilenameUtils.getExtension(e.toString()))));
+//		}
+//		catch (IOException e)
+//		{
+//			e.printStackTrace();
+//		}
+//		catalog.forEach(t -> t.tags.add("Default")); 
 		
 		/**************************
 		 *******Add to Frame*******
 		 **************************/
-		LibraryTextTagsImagePane libraryTextTagsImagePane = new LibraryTextTagsImagePane(catalog);
-		frame.getContentPane().add(libraryTextTagsImagePane);		
+//		LibraryTextTagsImagePane libraryTextTagsImagePane = new LibraryTextTagsImagePane(catalog);
+//		frame.getContentPane().add(libraryTextTagsImagePane);		
 	}
 }
