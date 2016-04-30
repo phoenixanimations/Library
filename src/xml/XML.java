@@ -21,7 +21,7 @@ public class XML
 {
 	private Element doc;
 	private List<LibraryFile> catalog = new ArrayList<LibraryFile>();
-	private XMLOutputter outputter;
+	private XMLOutputter outputter = new XMLOutputter();
 	
 	public static void main (String[] args)
 	{
@@ -32,13 +32,8 @@ public class XML
     { 
 		 try 
 		 {
-			if (new File("data.xml").exists())
-			{
-				doc = (Element) new SAXBuilder().build(new File("data.xml")).getRootElement();
-			} 
-			else
-			{
-			 
+			if (!new File("data.xml").exists())
+			{		 
 			 	Element root = new Element("DATABASE");
 			 	Document createDocument = new Document();
 			 	
@@ -50,35 +45,35 @@ public class XML
 					  	   	  	  e.toString().toLowerCase().contains(".png") ||
 					  	   	  	  e.toString().toLowerCase().contains(".tiff"))
 				 	 .forEachOrdered(e -> {
-				 		 				Element xmlLibraryFile = new Element("image" + i.get());
-				 		 				xmlLibraryFile.addContent(new Element("id").setText(i.toString()));
-				 		 				xmlLibraryFile.addContent(new Element("name").setText(FilenameUtils.getBaseName(e.toString())));
-				 		 				xmlLibraryFile.addContent(new Element("path").setText(e.toString()));
-				 		 				xmlLibraryFile.addContent(new Element("extension").setText(FilenameUtils.getExtension(e.toString())));
-				 		 				xmlLibraryFile.addContent(new Element("tags").addContent("Default"));
-				 		 				root.addContent(xmlLibraryFile);
-				 		 				i.getAndIncrement();
-					 			   });
+					 		 				Element xmlLibraryFile = new Element("image" + i.get());
+					 		 				xmlLibraryFile.addContent(new Element("id").setText(i.toString()));
+					 		 				xmlLibraryFile.addContent(new Element("name").setText(FilenameUtils.getBaseName(e.toString())));
+					 		 				xmlLibraryFile.addContent(new Element("path").setText(e.toString()));
+					 		 				xmlLibraryFile.addContent(new Element("extension").setText(FilenameUtils.getExtension(e.toString())));
+					 		 				xmlLibraryFile.addContent(new Element("tags").addContent(new Element ("Default")));
+					 		 				root.addContent(xmlLibraryFile);
+					 		 				i.getAndIncrement();
+					 			   		   });
 				createDocument.setRootElement(root);
 			 	outputter = new XMLOutputter();
 			 	outputter.setFormat(Format.getPrettyFormat());
 			 	outputter.output(createDocument, new FileWriter(new File("data.xml")));
-			 	doc = (Element) new SAXBuilder().build(new File("data.xml")).getRootElement();
 			}
+			doc = (Element) new SAXBuilder().build(new File("data.xml")).getRootElement();
 		 }		 
 		 catch (Exception e) 
 		 {
 		 	e.printStackTrace();
 		 }
 		 doc.getChildren().forEach(c -> catalog.add(new LibraryFile(Integer.parseInt(c.getChildText("id")),c.getChildText("name"), c.getChildText("path"), c.getChildText("extension"))));  
-		 
-		 addTag(catalog.get(0).id, "hi");
+		 addTag (catalog.get(0).id, "Hello");
     }
 	
 	private void saveXML ()
 	{
 		try 
 		{
+			outputter.setFormat(Format.getPrettyFormat());
 			outputter.output(doc, new FileWriter(new File("data.xml")));
 		}
 		catch (Exception e)
@@ -95,14 +90,14 @@ public class XML
 	public void addTag (int id, String tag)
 	{
 		catalog.get(id).tags.add(tag);
-		doc.getChildren().get(id).getChild("tags").addContent(tag);
+		doc.getChildren().get(id).getChild("tags").addContent(new Element(tag));
 		saveXML();
 	}
 	
 	public void removeTag (int id, String tag)
 	{
 		catalog.get(id).tags.remove(tag);
-		doc.getChildren().get(id).getChild("tags").removeChild(tag);
+		doc.getChildren().get(id).getChild("tags").removeAttribute(tag);
 		saveXML();
 	}
 }
