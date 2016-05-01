@@ -10,7 +10,6 @@ import java.util.concurrent.atomic.*;
 import org.apache.commons.io.FilenameUtils;
 import org.jdom2.Document;
 import org.jdom2.Element;
-import org.jdom2.filter.Filter;
 import org.jdom2.input.SAXBuilder;
 import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
@@ -23,12 +22,7 @@ public class XML
 	private Element doc;
 	private List<LibraryFile> catalog = new ArrayList<LibraryFile>();
 	private XMLOutputter outputter = new XMLOutputter();
-	
-	public static void main (String[] args)
-	{
-		new XML();
-	}
-	
+		
 	public XML ()
     { 
 		 try 
@@ -66,9 +60,11 @@ public class XML
 		 {
 		 	e.printStackTrace();
 		 }
-		 doc.getChildren().forEach(c -> catalog.add(new LibraryFile(Integer.parseInt(c.getChildText("id")),c.getChildText("name"), c.getChildText("path"), c.getChildText("extension"))));  
-//		 addTag (catalog.get(0).id, "Hello");
-//		 removeTag (catalog.get(0).id, "Hello");
+		 doc.getChildren().forEach(c -> {
+			 								List<String> tags = new ArrayList<String>();
+			 								c.getChild("tags").getChildren().forEach(t -> tags.add(t.getName()));			 								
+			 								catalog.add(new LibraryFile(Integer.parseInt(c.getChildText("id")),c.getChildText("name"), c.getChildText("path"), c.getChildText("extension"),tags));
+			 							});
     }
 	
 	private void saveXML ()
@@ -98,7 +94,7 @@ public class XML
 	
 	public void removeTag (int id, String tag)
 	{
-//		catalog.get(id).tags.remove(tag);
+		catalog.get(id).tags.remove(tag);
 		doc.getChildren().get(id).getChild("tags").removeChild(tag);
 		saveXML();
 	}

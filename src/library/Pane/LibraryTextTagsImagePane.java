@@ -13,16 +13,18 @@ import javax.swing.event.ListSelectionListener;
 
 import library.File.LibraryFile;
 import library.TextField.LibrarySearchBar;
+import xml.XML;
 
 public class LibraryTextTagsImagePane extends JSplitPane
 {
 	private static final long serialVersionUID = 9086829730005962851L;
-	public LibraryTextTagsImagePane (List<LibraryFile> catalog)
+	public LibraryTextTagsImagePane (XML xmlCatalog)
 	{
+		List<LibraryFile> catalog = xmlCatalog.getCatalog();
 		LibrarySearchBar search = new LibrarySearchBar();
 		JList <String> selectFiles = new JList<String>();
 		LibraryImagePane image = new LibraryImagePane();	
-		LibraryShowTags tags = new LibraryShowTags();
+		LibraryShowTags tags = new LibraryShowTags(xmlCatalog);
 		search.addActionListener(new ActionListener() 
 		{
 			@Override

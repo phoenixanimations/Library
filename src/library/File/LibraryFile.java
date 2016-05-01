@@ -9,11 +9,12 @@ public class LibraryFile
 	public String path;
 	public String extension;
 	public List<String> tags = new ArrayList<>();
-	public LibraryFile(int assignID,  String assignName, String assignPath, String assignExtension) 
+	public LibraryFile(int assignID,  String assignName, String assignPath, String assignExtension, List<String> assignTags) 
 	{
 		id = assignID;
 		name = assignName;
 		path = assignPath;
 		extension = assignExtension;
+		tags = assignTags;
 	}
 }

@@ -5,8 +5,7 @@
     <path>./img/artists.pixelovely.com/28df482d00d116b82d6530407423d29d.jpg</path>
     <extension>jpg</extension>
     <tags>
-      <Hello />
-      <Hello />
+      <Default />
     </tags>
   </image0>
   <image1>
@@ -25,6 +24,8 @@
     <extension>jpg</extension>
     <tags>
       <Default />
+      <Pole />
+      <Man />
     </tags>
   </image2>
   <image3>
@@ -61,6 +62,9 @@
     <extension>jpg</extension>
     <tags>
       <Default />
+      <Nude />
+      <Woman />
+      <Sitting />
     </tags>
   </image6>
   <image7>
@@ -70,6 +74,8 @@
     <extension>jpg</extension>
     <tags>
       <Default />
+      <Woman />
+      <Dancer />
     </tags>
   </image7>
   <image8>
