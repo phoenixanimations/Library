@@ -33,7 +33,7 @@ public class XML
 			 	Document createDocument = new Document();
 			 	
 			 	AtomicInteger i = new AtomicInteger(0);
-				Files.walk(Paths.get("./img"))
+				Files.walk(Paths.get("../Library"))
 				 	 .filter(Files::isRegularFile)
 				 	 .filter(e -> e.toString().toLowerCase().contains(".jpeg") || 
 					  	   	  	  e.toString().toLowerCase().contains(".jpg") ||
@@ -52,7 +52,7 @@ public class XML
 				createDocument.setRootElement(root);
 			 	outputter = new XMLOutputter();
 			 	outputter.setFormat(Format.getPrettyFormat());
-			 	outputter.output(createDocument, new FileWriter(new File("data.xml")));
+			 	outputter.output(createDocument, new FileWriter(new File("data.xml"))); //Make this inside the folder.
 			}
 			doc = (Element) new SAXBuilder().build(new File("data.xml")).getRootElement();
 		 }		 

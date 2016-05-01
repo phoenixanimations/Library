@@ -1,5 +1,6 @@
 package main;
 import java.awt.EventQueue;
+
 import javax.swing.JFrame;
 
 import library.Pane.LibraryTextTagsImagePane;
@@ -52,6 +53,6 @@ public class Library
 		 *******Add to Frame*******
 		 **************************/
 		LibraryTextTagsImagePane libraryTextTagsImagePane = new LibraryTextTagsImagePane(xmlLibraryCatalog);
-		frame.getContentPane().add(libraryTextTagsImagePane);		
+		frame.getContentPane().add(libraryTextTagsImagePane);	
 	}
 }

@@ -1,8 +1,12 @@
 package library.Pane;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+
 import java.util.List;
 import java.util.stream.Collectors;
+
 
 import javax.swing.ImageIcon;
 import javax.swing.JList;
@@ -50,6 +54,8 @@ public class LibraryTextTagsImagePane extends JSplitPane
 				LibraryFile selectedLibraryFile = search.getSortedCatalog().get(selectFiles.getSelectedIndex());
 				String path = selectedLibraryFile.path;
 				tags.show(selectedLibraryFile);
+				
+				
 				image.labelImage.setIcon(new ImageIcon(path));
 			}
 		});
