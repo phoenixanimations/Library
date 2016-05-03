@@ -4,6 +4,7 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
 import javax.swing.JFrame;
+
 import library.Pane.LibraryTextTagsImagePane;
 import system.XML;
 
@@ -79,6 +80,6 @@ public class Library
 		 *******Add to Frame*******
 		 **************************/
 		LibraryTextTagsImagePane libraryTextTagsImagePane = new LibraryTextTagsImagePane(xmlLibraryCatalog);
-		frame.getContentPane().add(libraryTextTagsImagePane);	
+		frame.getContentPane().add(libraryTextTagsImagePane);		
 	}
 }
