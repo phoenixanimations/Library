@@ -3,8 +3,8 @@ package xml;
 public class IllegalXMLCharacters 
 {
 	
-	private String[] illigalCharacters = {"~","`","!","@","#","$","%","^","&","*","(",")","-","_","=","+","[","{","]","}","\\","|","'",";",":",",","<",">",".","/"," ","≥","≤","•"};
-	private String[] replace = {"CHARonE","CHARtwO","CHARthreE","CHARfouR","CHARFivE","CHARSiX","CHARSeveN","CHAREighT","CHARNinE","CHARTeN","CHAREleveN","CHARTwelvE","CHARThirteeN","CHARFourteeN","CHARFifteeN","CHARSixteeN","CHARSeventeeN","CHAREightteeN","CHARNineteeN","CHARTwentY","CHARTwentyonE","CHARTwentytwO","CHARTwentythreE","CHARTwentyfouR","CHARTwentyfivE","CHARTwentysiX","CHARTwentyseveN","CHARTwentyeighT","CHARTwentyninE","CHARThirtY","CHARThirtyonE","CHARThirtytwO","CHARThirtythreE","CHARThirtyfouR"};
+	private String[] illigalCharacters = {"~","`","!","@","#","$","%","^","&","*","(",")","-","_","=","+","[","{","]","}","\\","|","'",";",":",",","<",">",".","/"," ","≥","≤","•","1","2","3","4","5","6","7","8","9","0"};
+	private String[] replace = {"CHARONE","CHARTWO","CHARTHREE","CHARFOUR","CHARFIVE","CHARSIX","CHARSEVEN","CHAREIGHT","CHARNINE","CHARTEN","CHARELEVEN","CHARTWELVE","CHARTHIRTEEN","CHARFOURTEEN","CHARFIFTEEN","CHARSIXTEEN","CHARSEVENTEEN","CHAREIGHTEEN","CHARNINETEEN","CHARTWENTY","CHARTWENTYONE","CHARTWENTYTWO","CHARTWENTYTHREE","CHARTWENTYFOUR","CHARTWENTYFIVE","CHARTWENTYSIX","CHARTWENTYSEVEN","CHARTWENTYEIGHT","CHARTWENTYNINE","CHARTHIRTY","CHARTHIRTYONE","CHARTHIRTYTWO","CHARTHIRTYTHREE","CHARTHIRTYFOUR","CHARTHIRTYFIVE","CHARTHIRTYSIX","CHARTHIRTYSEVEN","CHARTHIRTYEIGHT","CHARTHIRTYNINE","CHARFOURTY","CHARFOURTYONE","CHARFOURTYTWO","CHARFOURTYTHREE","CHARFOURTYFOUR"};
 	
 	public String stringToXML (String string)
 	{

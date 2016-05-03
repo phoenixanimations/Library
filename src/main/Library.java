@@ -5,7 +5,7 @@ import java.awt.event.WindowListener;
 
 import javax.swing.JFrame;
 import library.Pane.LibraryTextTagsImagePane;
-import xml.IllegalXMLCharacters;
+
 import xml.XML;
 
 public class Library 
