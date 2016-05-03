@@ -1,7 +1,7 @@
 package library.Pane;
 
 import java.awt.Desktop;
-import java.awt.Image;
+//import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 
-import javax.swing.ImageIcon;
+//import javax.swing.ImageIcon;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
@@ -28,6 +28,7 @@ import xml.XML;
 public class LibraryTextTagsImagePane extends JSplitPane
 {
 	private static final long serialVersionUID = 9086829730005962851L;
+	
 	public LibraryTextTagsImagePane (XML xmlCatalog)
 	{
 		List<LibraryFile> catalog = xmlCatalog.getCatalog();
@@ -58,12 +59,16 @@ public class LibraryTextTagsImagePane extends JSplitPane
 					return;
 				}
 				LibraryFile selectedLibraryFile = search.getSortedCatalog().get(selectFiles.getSelectedIndex());
-				String path = selectedLibraryFile.path;
 				tags.show(selectedLibraryFile);
 				
-				ImageIcon imageIcon = new ImageIcon(path); //Scaling the image
-				int width = imageIcon.getIconWidth()/3;
-				image.labelImage.setIcon(new ImageIcon(imageIcon.getImage().getScaledInstance(width, -1, Image.SCALE_FAST)));		
+//				String path = selectedLibraryFile.path;
+//				ImageIcon imageIcon = new ImageIcon(path); //Scaling the image
+//				int width = imageIcon.getIconWidth()/3;
+//				if (width > 1000)
+//				{
+//					width *= .4;
+//				}
+//				image.labelImage.setIcon(new ImageIcon(imageIcon.getImage().getScaledInstance(width, -1, Image.SCALE_FAST)));		
 			}
 		});
 		
@@ -75,7 +80,7 @@ public class LibraryTextTagsImagePane extends JSplitPane
 			@Override
 			public void keyReleased(KeyEvent e) 
 			{
-				if (KeyEvent.getKeyText(e.getKeyCode()).equals("O"))
+				if (KeyEvent.getKeyText(e.getKeyCode()).equals("-"))
 				{
 					LibraryFile selectedLibraryFileKey = search.getSortedCatalog().get(selectFiles.getSelectedIndex());
 					try 

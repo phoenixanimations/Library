@@ -38,7 +38,11 @@ public class XML
 				 	 .filter(e -> e.toString().toLowerCase().contains(".jpeg") || 
 					  	   	  	  e.toString().toLowerCase().contains(".jpg") ||
 					  	   	  	  e.toString().toLowerCase().contains(".png") ||
-					  	   	  	  e.toString().toLowerCase().contains(".tiff"))
+					  	   	  	  e.toString().toLowerCase().contains(".tiff") ||
+					  	   	  	  e.toString().toLowerCase().contains(".mkv") ||
+					  	   	  	  e.toString().toLowerCase().contains(".mp4") ||
+					  	   	  	  e.toString().toLowerCase().contains(".avi") ||
+					  	   	  	  e.toString().toLowerCase().contains(".wmv"))
 				 	 .forEachOrdered(e -> {
 					 		 				Element xmlLibraryFile = new Element("image" + i.get());
 					 		 				xmlLibraryFile.addContent(new Element("id").setText(i.toString()));
@@ -51,7 +55,7 @@ public class XML
 					 			   		   });
 				createDocument.setRootElement(root);
 			 	outputter = new XMLOutputter();
-			 	outputter.setFormat(Format.getPrettyFormat());
+			 	outputter.setFormat(Format.getCompactFormat());
 			 	outputter.output(createDocument, new FileWriter(new File("data.xml"))); //Make this inside the folder.
 			}
 			doc = (Element) new SAXBuilder().build(new File("data.xml")).getRootElement();
