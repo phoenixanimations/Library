@@ -22,8 +22,8 @@ import javax.swing.event.ListSelectionListener;
 
 import library.File.LibraryFile;
 import library.TextField.LibrarySearchBar;
-
-import xml.XML;
+import system.Que;
+import system.XML;
 
 public class LibraryTextTagsImagePane extends JSplitPane
 {
@@ -36,6 +36,8 @@ public class LibraryTextTagsImagePane extends JSplitPane
 		JList <String> selectFiles = new JList<String>();
 		LibraryImagePane image = new LibraryImagePane();	
 		LibraryShowTags tags = new LibraryShowTags(xmlCatalog);
+		Que que = new Que();
+		
 		search.addActionListener(new ActionListener() 
 		{
 			@Override
@@ -68,7 +70,7 @@ public class LibraryTextTagsImagePane extends JSplitPane
 //				{
 //					width *= .4;
 //				}
-//				image.labelImage.setIcon(new ImageIcon(imageIcon.getImage().getScaledInstance(width, -1, Image.SCALE_FAST)));		
+//				image.labelImage.setIcon(new ImageIcon(imageIcon.getImage().getScaledInstance(width, -1, Image.SCALE_FAST)));
 			}
 		});
 		
@@ -80,9 +82,9 @@ public class LibraryTextTagsImagePane extends JSplitPane
 			@Override
 			public void keyReleased(KeyEvent e) 
 			{
-				if (KeyEvent.getKeyText(e.getKeyCode()).equals("-"))
+				LibraryFile selectedLibraryFileKey = search.getSortedCatalog().get(selectFiles.getSelectedIndex());
+				if (e.getKeyCode() == KeyEvent.VK_RIGHT)
 				{
-					LibraryFile selectedLibraryFileKey = search.getSortedCatalog().get(selectFiles.getSelectedIndex());
 					try 
 					{
 						Desktop.getDesktop().open(new File(selectedLibraryFileKey.path));
@@ -90,6 +92,24 @@ public class LibraryTextTagsImagePane extends JSplitPane
 					catch (IOException e1) 
 					{
 						e1.printStackTrace();
+					}
+				}
+				
+				if (e.getKeyCode() == KeyEvent.VK_LEFT)
+				{
+					que.addToQue(selectedLibraryFileKey.path);
+				}
+				
+				if (e.getKeyCode() == KeyEvent.VK_Q)
+				{
+					try 
+					{
+						que.openFiles();
+					} 
+					catch (IOException e2) 
+					{
+						// TODO Auto-generated catch block
+						e2.printStackTrace();
 					}
 				}
 			}

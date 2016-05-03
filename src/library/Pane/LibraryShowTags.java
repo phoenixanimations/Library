@@ -8,7 +8,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 import library.File.LibraryFile;
-import xml.XML;
+import system.XML;
 
 public class LibraryShowTags extends JScrollPane
 {
@@ -28,7 +28,10 @@ public class LibraryShowTags extends JScrollPane
 				public void actionPerformed(ActionEvent e) 
 				{
 					xmlCatalog.removeTag(libraryFile.id, tag);
-					xmlCatalog.addTag(libraryFile.id, jFieldTag.getText());
+					if (!jFieldTag.getText().equals(""))
+					{
+						xmlCatalog.addTag(libraryFile.id, jFieldTag.getText());
+					}
 					jFieldTag.setFocusable(false);
 					jFieldTag.setFocusable(true);
 				}
@@ -44,7 +47,7 @@ public class LibraryShowTags extends JScrollPane
 				Boolean duplicateTag = false;
 				for (String tag : libraryFile.tags) 
 				{
-					if (tag.equals(jFieldNewTag.getText()))
+					if (tag.toLowerCase().equals(jFieldNewTag.getText().toLowerCase()))
 					{
 						duplicateTag = true;
 					}
@@ -52,7 +55,9 @@ public class LibraryShowTags extends JScrollPane
 				
 				if (!jFieldNewTag.getText().equals("") && !duplicateTag)
 				{
-					xmlCatalog.addTag(libraryFile.id, jFieldNewTag.getText());
+					String newTag = jFieldNewTag.getText().toLowerCase();
+					newTag = Character.toString(newTag.charAt(0)).toUpperCase() + newTag.substring(1);
+					xmlCatalog.addTag(libraryFile.id, newTag);
 					show(libraryFile);
 				}
 				else 
