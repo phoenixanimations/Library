@@ -22,7 +22,7 @@ public class XML
 	private Element doc;
 	private List<LibraryFile> catalog = new ArrayList<LibraryFile>();
 	private XMLOutputter outputter = new XMLOutputter();
-		
+	private IllegalXMLCharacters illegal = new IllegalXMLCharacters();
 	public XML ()
     { 
 		 try 
@@ -66,12 +66,12 @@ public class XML
 		 }
 		 doc.getChildren().forEach(c -> {
 			 								List<String> tags = new ArrayList<String>();
-			 								c.getChild("tags").getChildren().forEach(t -> tags.add(t.getName()));			 								
+			 								c.getChild("tags").getChildren().forEach(t -> tags.add(illegal.xmlToString(t.getName())));			 								
 			 								catalog.add(new LibraryFile(Integer.parseInt(c.getChildText("id")),c.getChildText("name"), c.getChildText("path"), c.getChildText("extension"),tags));
 			 							});
     }
 	
-	private void saveXML ()
+	public void saveXML ()
 	{
 		try 
 		{
@@ -92,14 +92,14 @@ public class XML
 	public void addTag (int id, String tag)
 	{
 		catalog.get(id).tags.add(tag);
+		tag = illegal.stringToXML(tag);
 		doc.getChildren().get(id).getChild("tags").addContent(new Element(tag));
-		saveXML();
 	}
 	
 	public void removeTag (int id, String tag)
 	{
 		catalog.get(id).tags.remove(tag);
+		tag = illegal.stringToXML(tag);
 		doc.getChildren().get(id).getChild("tags").removeChild(tag);
-		saveXML();
 	}
 }
