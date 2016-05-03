@@ -6,22 +6,20 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Que 
+public class Queue 
 {
-	private List<String> que = new ArrayList<String>();
+	private List<String> queue = new ArrayList<String>();
 	public void addToQue (String path)
 	{
-		que.add(path);
+		queue.add(path);
 	}
 	
 	public void openFiles () throws IOException
 	{	
-		for (String path : que) 
+		for (String path : queue) 
 		{
 			Desktop.getDesktop().open(new File(path));
 		}	
-		que.clear();
+		queue.clear();
 	}
-	
-	
 }
