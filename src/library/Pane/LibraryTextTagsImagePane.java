@@ -108,7 +108,6 @@ public class LibraryTextTagsImagePane extends JSplitPane
 					} 
 					catch (IOException e2) 
 					{
-						// TODO Auto-generated catch block
 						e2.printStackTrace();
 					}
 				}
