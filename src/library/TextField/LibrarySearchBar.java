@@ -3,7 +3,12 @@ package library.TextField;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+
 import java.util.List;
+import java.util.stream.Collectors;
+
+
+
 import system.Queue;
 
 import library.File.LibraryFile;
@@ -95,7 +100,7 @@ public class LibrarySearchBar extends LibraryTextField
 	}
 
 	public List<LibraryFile> getSortedCatalog() 
-	{
-		return sortedCatalog;
+	{		
+		return sortedCatalog.stream().sorted((l1,l2) -> l1.name.compareToIgnoreCase(l2.name)).collect(Collectors.toList());
 	}
 }
