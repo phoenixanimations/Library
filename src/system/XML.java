@@ -96,8 +96,10 @@ public class XML
 	public void addTag (int id, String tag)
 	{
 		//Make it so tags are strings so you don't have to worry about the illegal characters.
+		catalog.get(id).tags.remove(tag);
 		catalog.get(id).tags.add(tag);
 		tag = illegal.stringToXML(tag);
+		doc.getChildren().get(id).getChild("tags").removeChild(tag);
 		doc.getChildren().get(id).getChild("tags").addContent(new Element(tag));
 	}
 	

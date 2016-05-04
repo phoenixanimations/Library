@@ -4,9 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import com.sun.org.apache.xml.internal.resolver.Catalog;
-
 import library.File.LibraryFile;
+import system.XML;
 
 public class LibrarySearchBar extends LibraryTextField
 {
@@ -19,11 +18,28 @@ public class LibrarySearchBar extends LibraryTextField
 		setColumns(10);
 	}
 	
-	public void onActionListener (List<LibraryFile> catalog)
+	
+	public void onActionListener (List<LibraryFile> catalog, XML xml)
 	{
 		onActionListener();
 		sortedCatalog.clear();
+		code(xml);
 		search(catalog);
+	}
+	
+	public void code (XML xml)
+	{
+		if (getLastString().contains("[Auto Tag]"))
+		{
+			String autoTag = getLastString().split("]")[1];
+			xml.getCatalog().forEach(l -> 
+			{
+				if (l.path.toLowerCase().contains(autoTag.toLowerCase()))
+				{
+					xml.addTag(l.id, autoTag);
+				}
+			});
+		}
 	}
 	
 	private void search (List<LibraryFile> catalog)

@@ -43,7 +43,7 @@ public class LibraryTextTagsImagePane extends JSplitPane
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				search.onActionListener(catalog);
+				search.onActionListener(catalog, xmlCatalog);
 				String[] names = new String [search.getSortedCatalog().stream().map(c -> c.name).collect(Collectors.toList()).size()];
 				search.getSortedCatalog().stream().map(c -> c.name).collect(Collectors.toList()).toArray(names);
 				selectFiles.setListData(names);
