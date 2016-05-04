@@ -14,6 +14,11 @@ public class Queue
 		queue.add(path);
 	}
 	
+	public void clear ()
+	{
+		queue.clear();
+	}
+	
 	public void openFiles () throws IOException
 	{	
 		for (String path : queue) 

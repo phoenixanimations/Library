@@ -8,9 +8,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
-import java.util.stream.Collectors;
 
+import java.util.stream.Collectors;
 
 //import javax.swing.ImageIcon;
 import javax.swing.JList;
@@ -31,7 +30,6 @@ public class LibraryTextTagsImagePane extends JSplitPane
 	
 	public LibraryTextTagsImagePane (XML xmlCatalog)
 	{
-		List<LibraryFile> catalog = xmlCatalog.getCatalog();
 		LibrarySearchBar search = new LibrarySearchBar();
 		JList <String> selectFiles = new JList<String>();
 		LibraryImagePane image = new LibraryImagePane();	
@@ -43,9 +41,9 @@ public class LibraryTextTagsImagePane extends JSplitPane
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				search.onActionListener(catalog, xmlCatalog);
+				search.onActionListener(xmlCatalog, queue);
 				String[] names = new String [search.getSortedCatalog().stream().map(c -> c.name).collect(Collectors.toList()).size()];
-				search.getSortedCatalog().stream().map(c -> c.name).collect(Collectors.toList()).toArray(names);
+				search.getSortedCatalog().stream().map(c -> c.name).sorted(String.CASE_INSENSITIVE_ORDER).collect(Collectors.toList()).toArray(names);
 				selectFiles.setListData(names);
 				selectFiles.clearSelection();
 			}

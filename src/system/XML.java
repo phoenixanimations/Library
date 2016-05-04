@@ -7,6 +7,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.*;
+import java.util.stream.Collectors;
+
 import org.apache.commons.io.FilenameUtils;
 import org.jdom2.Document;
 import org.jdom2.Element;
@@ -70,8 +72,8 @@ public class XML
 		 }
 		 doc.getChildren().forEach(c -> {
 			 								List<String> tags = new ArrayList<String>();
-			 								c.getChild("tags").getChildren().forEach(t -> tags.add(illegal.xmlToString(t.getName())));			 								
-			 								catalog.add(new LibraryFile(Integer.parseInt(c.getChildText("id")),c.getChildText("name"), c.getChildText("path"), c.getChildText("extension"),tags));
+			 								c.getChild("tags").getChildren().forEach(t -> tags.add(illegal.xmlToString(t.getName())));	
+			 								catalog.add(new LibraryFile(Integer.parseInt(c.getChildText("id")),c.getChildText("name"), c.getChildText("path"), c.getChildText("extension"),tags.stream().sorted().collect(Collectors.toList())));
 			 							});
     }
 	

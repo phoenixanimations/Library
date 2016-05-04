@@ -1,8 +1,10 @@
 package library.TextField;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import system.Queue;
 
 import library.File.LibraryFile;
 import system.XML;
@@ -19,14 +21,14 @@ public class LibrarySearchBar extends LibraryTextField
 	}
 	
 	
-	public void onActionListener (List<LibraryFile> catalog, XML xml)
+	public void onActionListener (XML xml, Queue queue)
 	{
 		sortedCatalog.clear();
-		code(xml);
-		search(catalog);
+		code(xml, queue);
+		search(xml.getCatalog());
 	}
 	
-	public void code (XML xml)
+	public void code (XML xml, Queue queue)
 	{
 		if (getText().contains("[Auto Tag]"))
 		{
@@ -38,6 +40,23 @@ public class LibrarySearchBar extends LibraryTextField
 					xml.addTag(l.id, autoTag);
 				}
 			});
+		}
+		
+		if (getText().contains("[Clear Queue]") || getText().contains("[Clear Que]"))
+		{
+			queue.clear();
+		}
+		
+		if (getText().contains("[Open Queue]"))
+		{
+			try 
+			{
+				queue.openFiles();
+			} 
+			catch (IOException e) 
+			{
+				e.printStackTrace();
+			}
 		}
 	}
 	

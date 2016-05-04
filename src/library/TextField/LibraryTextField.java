@@ -17,7 +17,7 @@ public class LibraryTextField extends JTextField
 {
 	private static final long serialVersionUID = 4447203274975665232L;
 	private int scroll = 0;
-	private List<String> lastString = new ArrayList<String>();
+	protected List<String> lastString = new ArrayList<String>();
 	
 	public LibraryTextField ()
 	{
