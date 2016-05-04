@@ -74,8 +74,8 @@ public class LibraryTextTagsImagePane extends JSplitPane
 			}
 		});
 		
-		selectFiles.addKeyListener(new KeyListener() {
-			
+		selectFiles.addKeyListener(new KeyListener() 
+		{	
 			@Override
 			public void keyTyped(KeyEvent e) {}
 			

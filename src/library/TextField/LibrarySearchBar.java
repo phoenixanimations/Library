@@ -21,7 +21,6 @@ public class LibrarySearchBar extends LibraryTextField
 	
 	public void onActionListener (List<LibraryFile> catalog, XML xml)
 	{
-		onActionListener();
 		sortedCatalog.clear();
 		code(xml);
 		search(catalog);
@@ -29,9 +28,9 @@ public class LibrarySearchBar extends LibraryTextField
 	
 	public void code (XML xml)
 	{
-		if (getLastString().contains("[Auto Tag]"))
+		if (getText().contains("[Auto Tag]"))
 		{
-			String autoTag = getLastString().split("]")[1];
+			String autoTag = getText().split("]")[1];
 			xml.getCatalog().forEach(l -> 
 			{
 				if (l.path.toLowerCase().contains(autoTag.toLowerCase()))
@@ -44,7 +43,7 @@ public class LibrarySearchBar extends LibraryTextField
 	
 	private void search (List<LibraryFile> catalog)
 	{
-		List <String> seperate = Arrays.asList(getLastString().split("(?=\\+)|(?=-)"));
+		List <String> seperate = Arrays.asList(getText().split("(?=\\+)|(?=-)"));
 		List <String> add = new ArrayList<String>();
 		List <String> minus = new ArrayList<String>();
 		
