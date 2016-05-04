@@ -21,22 +21,25 @@ public class LibraryShowTags extends JScrollPane
 		JPanel listOfTags = new JPanel(new GridLayout(1, 0));
 		for (String tag : libraryFile.tags)
 		{
-			JTextField jFieldTag = new JTextField(tag);
-			jFieldTag.addActionListener(new ActionListener() 
+			if ((tag.equals("Default") || tag.equals("All")) == false)
 			{
-				@Override
-				public void actionPerformed(ActionEvent e) 
+				JTextField jFieldTag = new JTextField(tag);
+				jFieldTag.addActionListener(new ActionListener() 
 				{
-					xmlCatalog.removeTag(libraryFile.id, tag);
-					if (!jFieldTag.getText().equals(""))
+					@Override
+					public void actionPerformed(ActionEvent e) 
 					{
-						xmlCatalog.addTag(libraryFile.id, jFieldTag.getText());
+						xmlCatalog.removeTag(libraryFile.id, tag);
+						if (!jFieldTag.getText().equals(""))
+						{
+							xmlCatalog.addTag(libraryFile.id, jFieldTag.getText());
+						}
+						jFieldTag.setFocusable(false);
+						jFieldTag.setFocusable(true);
 					}
-					jFieldTag.setFocusable(false);
-					jFieldTag.setFocusable(true);
-				}
-			});
-			listOfTags.add(jFieldTag);			
+				});
+				listOfTags.add(jFieldTag);	
+			}
 		}
 		JTextField jFieldNewTag = new JTextField();
 		jFieldNewTag.addActionListener(new ActionListener() 

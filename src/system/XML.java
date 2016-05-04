@@ -53,7 +53,7 @@ public class XML
 					 		 				xmlLibraryFile.addContent(new Element("name").setText(FilenameUtils.getBaseName(e.toString())));
 					 		 				xmlLibraryFile.addContent(new Element("path").setText(e.toString()));
 					 		 				xmlLibraryFile.addContent(new Element("extension").setText(FilenameUtils.getExtension(e.toString())));
-					 		 				xmlLibraryFile.addContent(new Element("tags").addContent(new Element ("Default")));
+					 		 				xmlLibraryFile.addContent(new Element("tags").addContent(new Element ("Default")).addContent(new Element ("All")));
 					 		 				root.addContent(xmlLibraryFile);
 					 		 				i.getAndIncrement();
 					 			   		   });
@@ -109,20 +109,4 @@ public class XML
 		tag = illegal.stringToXML(tag);
 		doc.getChildren().get(id).getChild("tags").removeChild(tag);
 	}
-	
-	//DELETE&CHANGE//
-	//DELETE&CHANGE//
-	//DELETE&CHANGE//
-	//DELETE&CHANGE//
-//	private void autoTag (String path, String tag, Element elementTag)
-//	{
-//		if (path.contains(tag))
-//		{
-//			elementTag.getChild("tags").addContent(new Element(tag));
-//		}
-//	}
-	//DELETE&CHANGE//
-	//DELETE&CHANGE//
-	//DELETE&CHANGE//
-	//DELETE&CHANGE//
 }
