@@ -32,7 +32,7 @@ public class LibraryTextTagsImagePane extends JSplitPane
 	{
 		LibrarySearchBar search = new LibrarySearchBar();
 		JList <String> selectFiles = new JList<String>();
-		LibraryImagePane image = new LibraryImagePane();	
+
 		LibraryShowTags tags = new LibraryShowTags(xmlCatalog);
 		Queue queue = new Queue();
 		
@@ -115,10 +115,14 @@ public class LibraryTextTagsImagePane extends JSplitPane
 			public void keyPressed(KeyEvent e) {}
 		});
 		
-		JSplitPane imageTags = new JSplitPane(JSplitPane.VERTICAL_SPLIT,image,tags);
-		imageTags.setDividerLocation(340);
-		JSplitPane scrollImageTags = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,new JScrollPane(selectFiles),imageTags);		
+//		JSplitPane imageTags = new JSplitPane(JSplitPane.VERTICAL_SPLIT,image,tags);
+//		imageTags.setDividerLocation(340);
+//		JSplitPane scrollImageTags = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,new JScrollPane(selectFiles),imageTags);		
+		JSplitPane scrollImageTags = new JSplitPane(JSplitPane.VERTICAL_SPLIT,new JScrollPane(selectFiles),tags);
+		scrollImageTags.setDividerLocation(360);
+		scrollImageTags.setResizeWeight(1d);
 		orientation = JSplitPane.VERTICAL_SPLIT;
+		setDividerSize(1);
 		setTopComponent(search);
 		setBottomComponent(scrollImageTags);
 		updateUI();

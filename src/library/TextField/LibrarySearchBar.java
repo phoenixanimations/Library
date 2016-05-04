@@ -63,6 +63,12 @@ public class LibrarySearchBar extends LibraryTextField
 				e.printStackTrace();
 			}
 		}
+		
+		if (getText().contains("[Refresh]") || getText().contains("[R]") || getText().contains("[r]"))
+		{
+			xml.refresh();
+			setText("Done");
+		}
 	}
 	
 	private void search (List<LibraryFile> catalog)
