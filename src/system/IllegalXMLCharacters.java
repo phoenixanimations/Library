@@ -2,17 +2,19 @@ package system;
 
 public class IllegalXMLCharacters 
 {
-	
 	private String[] illigalCharacters = {"~","`","!","@","#","$","%","^","&","*","(",")","-","_","=","+","[","{","]","}","|","'",";",":",",","<",">",".","/"," ","≥","≤","•","1","2","3","4","5","6","7","8","9","0","\\"};
-	private String[] replace = {"CHARONE","CHARTWO","CHARTHREE","CHARFOUR","CHARFIVE","CHARSIX","CHARSEVEN","CHAREIGHT","CHARNINE","CHARTEN","CHARELEVEN","CHARTWELVE","CHARTHIRTEEN","CHARFOURTEEN","CHARFIFTEEN","CHARSIXTEEN","CHARSEVENTEEN","CHAREIGHTEEN","CHARNINETEEN","CHARTWENTY","CHARTWENTYONE","CHARTWENTYTWO","CHARTWENTYTHREE","CHARTWENTYFOUR","CHARTWENTYFIVE","CHARTWENTYSIX","CHARTWENTYSEVEN","CHARTWENTYEIGHT","CHARTWENTYNINE","CHARTHIRTY","CHARTHIRTYONE","CHARTHIRTYTWO","CHARTHIRTYTHREE","CHARTHIRTYFOUR","CHARTHIRTYFIVE","CHARTHIRTYSIX","CHARTHIRTYSEVEN","CHARTHIRTYEIGHT","CHARTHIRTYNINE","CHARFOURTY","CHARFOURTYONE","CHARFOURTYTWO","CHARFOURTYTHREE","CHARFOURTYFOUR"};
+	private String[] numbers = {"Zero","ONE","TWO","THREE","FOUR","FIVE","SIX","SEVEN","EIGHT","NINE"};
 	
 	public String stringToXML (String string)
 	{
-		for (int i = 0; i < replace.length; i++)
+		for (Double i = 0d; i < illigalCharacters.length; i++)
 		{
-			if (string.contains(illigalCharacters[i]))
+			Double first = Math.floor(i * .1);
+			Double second = ((i * .1) - first) * 10;
+			String xml = numbers[first.intValue()] + numbers[second.intValue()];
+			if (string.contains(illigalCharacters[i.intValue()]))
 			{
-				string = string.replace(illigalCharacters[i], replace[i]);
+				string = string.replace(illigalCharacters[i.intValue()], xml);
 			}
 		}
 		return string;
@@ -20,11 +22,14 @@ public class IllegalXMLCharacters
 	
 	public String xmlToString (String string)
 	{
-		for (int i = 0; i < replace.length; i++)
+		for (Double i = 0d; i < illigalCharacters.length; i++)
 		{
-			if (string.contains(replace[i]))
+			Double first = Math.floor(i * .1);
+			Double second = ((i * .1) - first) * 10;
+			String xml = numbers[first.intValue()] + numbers[second.intValue()];
+			if (string.contains(xml))
 			{
-				string = string.replace(replace[i], illigalCharacters[i]);
+				string = string.replace(xml, illigalCharacters[i.intValue()]);
 			}
 		}
 		return string;

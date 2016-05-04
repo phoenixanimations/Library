@@ -1,7 +1,10 @@
 package library.TextField;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+
+import com.sun.org.apache.xml.internal.resolver.Catalog;
 
 import library.File.LibraryFile;
 
@@ -20,19 +23,43 @@ public class LibrarySearchBar extends LibraryTextField
 	{
 		onActionListener();
 		sortedCatalog.clear();
-		for (LibraryFile libraryFile : catalog) 
-		{
-			for (String tag : libraryFile.tags)
-			{
-				tag = tag.toLowerCase();
-				if (tag.equals(getLastString().toLowerCase()) && !getLastString().equals(""))
-				{
-					sortedCatalog.add(libraryFile);
-				}
-			}
-		}
+		search(catalog);
 	}
 	
+	private void search (List<LibraryFile> catalog)
+	{
+		List <String> seperate = Arrays.asList(getLastString().split("(?=\\+)|(?=-)"));
+		List <String> add = new ArrayList<String>();
+		List <String> minus = new ArrayList<String>();
+		
+		for (String string : seperate)
+		{
+			if (string.contains("+")) { add.add(string.replace("+", "")); }
+			else if (string.contains("-")) { minus.add(string.replace("-", "")); }
+			else { add.add(string); }
+		}
+
+		catalog.forEach(l -> { l.tags.forEach(t -> { add.forEach(a -> 
+		{ 
+			if (t.toLowerCase().equals(a.toLowerCase())) 
+			{
+				sortedCatalog.remove(l);
+				sortedCatalog.add(l);
+			} 
+		});});});
+
+		if (minus.size() > 0)
+		{
+			catalog.forEach(l -> {l.tags.forEach(t -> { minus.forEach(m -> 
+			{
+				if (t.toLowerCase().equals(m.toLowerCase()))
+				{
+					sortedCatalog.remove(l);					
+				}
+			});});});
+		}
+	}
+
 	public List<LibraryFile> getSortedCatalog() 
 	{
 		return sortedCatalog;

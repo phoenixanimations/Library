@@ -54,48 +54,6 @@ public class XML
 					 		 				xmlLibraryFile.addContent(new Element("path").setText(e.toString()));
 					 		 				xmlLibraryFile.addContent(new Element("extension").setText(FilenameUtils.getExtension(e.toString())));
 					 		 				xmlLibraryFile.addContent(new Element("tags").addContent(new Element ("Default")));
-					 					 	//DELETE THIS CODE//
-					 					 	//DELETE THIS CODE//
-					 					 	//DELETE THIS CODE//
-					 					 	//DELETE THIS CODE//
-//					 		 				autoTag(e.toString(), "Photos", xmlLibraryFile);
-//					 		 				autoTag(e.toString(), "Wildlife", xmlLibraryFile);
-//					 		 				autoTag(e.toString(), "Insect", xmlLibraryFile);
-//					 		 				autoTag(e.toString(), "Fish", xmlLibraryFile);
-//					 		 				autoTag(e.toString(), "Animal", xmlLibraryFile);
-//					 		 				autoTag(e.toString(), "War", xmlLibraryFile);
-//					 		 				autoTag(e.toString(), "Vehicle", xmlLibraryFile);
-//					 		 				autoTag(e.toString(), "Texture", xmlLibraryFile);
-//					 		 				autoTag(e.toString(), "Space", xmlLibraryFile);
-//					 		 				autoTag(e.toString(), "Object", xmlLibraryFile);
-//					 		 				autoTag(e.toString(), "Landscape", xmlLibraryFile);
-//					 		 				autoTag(e.toString(), "Humans", xmlLibraryFile);
-//					 		 				autoTag(e.toString(), "Anatomy", xmlLibraryFile);
-//					 		 				autoTag(e.toString(), "Outfits", xmlLibraryFile);
-//					 		 				autoTag(e.toString(), "Skeleton", xmlLibraryFile);
-//					 		 				autoTag(e.toString(), "History", xmlLibraryFile);
-//					 		 				autoTag(e.toString(), "Entertainment", xmlLibraryFile);
-//					 		 				autoTag(e.toString(), "Boat", xmlLibraryFile);
-//					 		 				autoTag(e.toString(), "Documentary", xmlLibraryFile);
-//					 		 				autoTag(e.toString(), "Artists", xmlLibraryFile);
-//					 		 				autoTag(e.toString(), "Studios", xmlLibraryFile);
-//					 		 				autoTag(e.toString(), "Website", xmlLibraryFile);
-//					 		 				autoTag(e.toString(), "Film", xmlLibraryFile);
-//					 		 				autoTag(e.toString(), "Storyboarding", xmlLibraryFile);
-//					 		 				autoTag(e.toString(), "Vietnam", xmlLibraryFile);
-//					 		 				autoTag(e.toString(), "Government", xmlLibraryFile);
-//					 		 				autoTag(e.toString(), "Literature", xmlLibraryFile);
-//					 		 				autoTag(e.toString(), "Disney", xmlLibraryFile);
-//					 		 				autoTag(e.toString(), "Movie", xmlLibraryFile);
-//					 		 				autoTag(e.toString(), "Screenplay", xmlLibraryFile);
-//					 		 				autoTag(e.toString(), "Video", xmlLibraryFile);
-//					 		 				autoTag(e.toString(), "Art", xmlLibraryFile);
-//					 		 				autoTag(e.toString(), "Coding", xmlLibraryFile);
-//					 		 				autoTag(e.toString(), "Reference", xmlLibraryFile);
-					 					 	//DELETE THIS CODE//
-					 					 	//DELETE THIS CODE//
-					 					 	//DELETE THIS CODE//
-					 					 	//DELETE THIS CODE//
 					 		 				root.addContent(xmlLibraryFile);
 					 		 				i.getAndIncrement();
 					 			   		   });
@@ -150,10 +108,10 @@ public class XML
 		doc.getChildren().get(id).getChild("tags").removeChild(tag);
 	}
 	
-	//DELETE/CHANGE//
-	//DELETE/CHANGE//
-	//DELETE/CHANGE//
-	//DELETE/CHANGE//
+	//DELETE&CHANGE//
+	//DELETE&CHANGE//
+	//DELETE&CHANGE//
+	//DELETE&CHANGE//
 //	private void autoTag (String path, String tag, Element elementTag)
 //	{
 //		if (path.contains(tag))
@@ -161,8 +119,8 @@ public class XML
 //			elementTag.getChild("tags").addContent(new Element(tag));
 //		}
 //	}
-	//DELETE/CHANGE//
-	//DELETE/CHANGE//
-	//DELETE/CHANGE//
-	//DELETE/CHANGE//
+	//DELETE&CHANGE//
+	//DELETE&CHANGE//
+	//DELETE&CHANGE//
+	//DELETE&CHANGE//
 }

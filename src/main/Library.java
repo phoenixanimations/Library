@@ -2,6 +2,10 @@ package main;
 import java.awt.EventQueue;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.sql.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.swing.JFrame;
 
@@ -80,6 +84,6 @@ public class Library
 		 *******Add to Frame*******
 		 **************************/
 		LibraryTextTagsImagePane libraryTextTagsImagePane = new LibraryTextTagsImagePane(xmlLibraryCatalog);
-		frame.getContentPane().add(libraryTextTagsImagePane);		
+		frame.getContentPane().add(libraryTextTagsImagePane);
 	}
 }
