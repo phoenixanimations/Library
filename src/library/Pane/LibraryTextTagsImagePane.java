@@ -109,6 +109,11 @@ public class LibraryTextTagsImagePane extends JSplitPane
 						e2.printStackTrace();
 					}
 				}
+				
+				if (e.getKeyCode() == KeyEvent.VK_SLASH)
+				{
+					search.setText(selectedLibraryFileKey.path);
+				}
 			}
 			
 			@Override

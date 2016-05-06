@@ -8,7 +8,7 @@ import system.XML;
 
 public class Library 
 {
-	private JFrame frame;
+	private JFrame frame = new JFrame();
 	private XML xmlLibraryCatalog;
 	/**************************
 	 **Launch the application**
@@ -21,7 +21,10 @@ public class Library
 			{
 				try 
 				{
-					new Library();
+					Library library = new Library();
+					library.frame.setBounds(100, 100, 600, 472);
+					library.frame.setVisible(true);
+					library.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				} 
 				catch (Exception e) 
 				{
@@ -36,10 +39,6 @@ public class Library
 	 **************************/
 	public Library() 
 	{
-		frame = new JFrame();
-		frame.setVisible(true);
-		frame.setBounds(100, 100, 600, 472);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		xmlLibraryCatalog = new XML();
 		frame.addWindowListener(new WindowListener() {
 			@Override

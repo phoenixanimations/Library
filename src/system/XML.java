@@ -15,7 +15,8 @@ import java.util.concurrent.atomic.*;
 import java.util.stream.Collectors;
 
 import org.apache.commons.io.FilenameUtils;
-import org.jdom2.Attribute;
+
+
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.input.SAXBuilder;
@@ -71,7 +72,9 @@ public class XML
 				createDocument.setRootElement(root);
 			 	outputter = new XMLOutputter();
 			 	outputter.setFormat(Format.getCompactFormat());
-			 	outputter.output(createDocument, new FileWriter(new File("data.xml")));
+			 	FileWriter fileWriter = new FileWriter(new File("data.xml"));
+			 	outputter.output(createDocument, fileWriter);
+			 	fileWriter.close();
 			}
 			doc = (Element) new SAXBuilder().build(new File("data.xml")).getRootElement();
 		 }		 
@@ -91,7 +94,9 @@ public class XML
 		try 
 		{
 			outputter.setFormat(Format.getCompactFormat());
-			outputter.output(doc, new FileWriter(new File("data.xml")));
+			FileWriter fileWriter = new FileWriter(new File("data.xml"));
+			outputter.output(doc, fileWriter);
+			fileWriter.close();
 		}
 		catch (Exception e)
 		{
