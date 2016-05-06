@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.concurrent.atomic.*;
 import java.util.stream.Collectors;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 
 
@@ -109,6 +110,23 @@ public class XML
 		return catalog;
 	}
 	
+	public void renameFile (LibraryFile libraryFile, String name) throws IOException
+	{		
+		LibraryFile changeFile = libraryFile;
+		
+		File original = FileUtils.getFile(libraryFile.path);
+		String directory = FilenameUtils.getFullPath(libraryFile.path);
+		File move = new File(directory + name + "." + libraryFile.extension);
+		
+		changeFile.name = name;
+		changeFile.path = directory + name + "." + libraryFile.extension;
+		doc.getChildren().get(libraryFile.id).getChild("name").setText(changeFile.name);
+		doc.getChildren().get(libraryFile.id).getChild("path").setText(changeFile.path);
+		
+		
+		FileUtils.moveFile(original, move);
+	}
+	
 	public void addTag (int id, String tag)
 	{
 		//Make it so tags are strings so you don't have to worry about the illegal characters.
@@ -126,7 +144,7 @@ public class XML
 		doc.getChildren().get(id).getChild("tags").removeChild(tag);
 	}
 
-	public List<String> bList = new ArrayList<String>(); ///DELETE
+	public List<String> bList = new ArrayList<String>(); ///DELETE MAYBE?
 	public void addBlacklistTag  (String tag)
 	{
 		bList.add(tag);
@@ -134,6 +152,10 @@ public class XML
 	
 	public void removeBlacklistTag  (String tag)
 	{
+		if (tag.toLowerCase().equals("all"))
+		{
+			bList.clear();
+		}
 		bList.remove(tag);
 	}
 	

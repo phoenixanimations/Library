@@ -64,22 +64,16 @@ public class LibrarySearchBar extends LibraryTextField
 			}
 		}
 		
-		if (getText().contains("[Refresh]") || getText().contains("[R]") || getText().contains("[r]"))
+		if (getText().toLowerCase().contains("[refresh]") || getText().toLowerCase().contains("[r]"))
 		{
 			xml.refresh();
 			setText("Done");
 		}
 		
-		if (getText().contains("[Blacklist]") || getText().contains("[Hide]") || getText().contains("[h]"))
+		if (getText().toLowerCase().contains("[blacklist]") || getText().toLowerCase().contains("[hide]") || getText().toLowerCase().contains("[h]"))
 		{
 			String code = getText().split("]")[1];
 			xml.addBlacklistTag(code);
-		}
-		
-		if (getText().contains("[Remove Blacklist]") || getText().contains("[Remove Hide]"))
-		{
-			String code = getText().split("]")[1];
-			xml.removeBlacklistTag(code);
 		}
 	}
 	

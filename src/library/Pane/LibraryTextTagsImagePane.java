@@ -41,6 +41,25 @@ public class LibraryTextTagsImagePane extends JSplitPane
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
+				if (search.getText().toLowerCase().contains("[rename file]") && !selectFiles.isSelectionEmpty())
+				{
+					System.out.println(selectFiles.getSelectedIndex());
+					LibraryFile renameLibraryFile = search.getSortedCatalog().get(selectFiles.getSelectedIndex());
+					String fileName = search.getText().split("]")[1];
+					try 
+					{
+						xmlCatalog.renameFile(renameLibraryFile, fileName);
+					} 
+					catch (IOException e1) 
+					{
+						e1.printStackTrace();
+					}
+					String[] names = new String [search.getSortedCatalog().stream().map(c -> c.name).collect(Collectors.toList()).size()];
+					search.getSortedCatalog().stream().map(c -> c.name).collect(Collectors.toList()).toArray(names);
+					selectFiles.setListData(names); 
+					return;
+				}
+				
 				search.onActionListener(xmlCatalog, queue);
 				String[] names = new String [search.getSortedCatalog().stream().map(c -> c.name).collect(Collectors.toList()).size()];
 				search.getSortedCatalog().stream().map(c -> c.name).collect(Collectors.toList()).toArray(names);
@@ -115,7 +134,7 @@ public class LibraryTextTagsImagePane extends JSplitPane
 					search.setText(selectedLibraryFileKey.path);
 				}
 			}
-			
+
 			@Override
 			public void keyPressed(KeyEvent e) {}
 		});
