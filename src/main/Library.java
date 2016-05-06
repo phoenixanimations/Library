@@ -2,11 +2,7 @@ package main;
 import java.awt.EventQueue;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-
-
-
 import javax.swing.JFrame;
-
 import library.Pane.LibraryTextTagsImagePane;
 import system.XML;
 

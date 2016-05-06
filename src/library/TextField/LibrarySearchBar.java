@@ -30,19 +30,19 @@ public class LibrarySearchBar extends LibraryTextField
 	{
 		sortedCatalog.clear();
 		code(xml, queue);
-		search(xml.getCatalog());
+		search(xml);
 	}
 	
 	public void code (XML xml, Queue queue)
-	{
+	{	
 		if (getText().contains("[Auto Tag]"))
 		{
-			String autoTag = getText().split("]")[1];
+			String code = getText().split("]")[1];
 			xml.getCatalog().forEach(l -> 
 			{
-				if (l.path.toLowerCase().contains(autoTag.toLowerCase()))
+				if (l.path.toLowerCase().contains(code.toLowerCase()))
 				{
-					xml.addTag(l.id, autoTag);
+					xml.addTag(l.id, code);
 				}
 			});
 		}
@@ -69,11 +69,24 @@ public class LibrarySearchBar extends LibraryTextField
 			xml.refresh();
 			setText("Done");
 		}
+		
+		if (getText().contains("[Blacklist]") || getText().contains("[Hide]") || getText().contains("[h]"))
+		{
+			String code = getText().split("]")[1];
+			xml.addBlacklistTag(code);
+		}
+		
+		if (getText().contains("[Remove Blacklist]") || getText().contains("[Remove Hide]"))
+		{
+			String code = getText().split("]")[1];
+			xml.removeBlacklistTag(code);
+		}
 	}
 	
-	private void search (List<LibraryFile> catalog)
+	private void search (XML xml)
 	{
-		List <String> seperate = Arrays.asList(getText().split("(?=\\+)|(?=-)"));
+		String searchTerm = getText() + xml.getBlacklistTag();
+		List <String> seperate = Arrays.asList(searchTerm.split("(?=\\+)|(?=-)"));
 		List <String> add = new ArrayList<String>();
 		List <String> minus = new ArrayList<String>();
 		
@@ -84,7 +97,7 @@ public class LibrarySearchBar extends LibraryTextField
 			else { add.add(string); }
 		}
 
-		catalog.forEach(l -> { l.tags.forEach(t -> { add.forEach(a -> 
+		xml.getCatalog().forEach(l -> { l.tags.forEach(t -> { add.forEach(a -> 
 		{ 
 			if (t.toLowerCase().equals(a.toLowerCase())) 
 			{
@@ -95,7 +108,7 @@ public class LibrarySearchBar extends LibraryTextField
 
 		if (minus.size() > 0)
 		{
-			catalog.forEach(l -> {l.tags.forEach(t -> { minus.forEach(m -> 
+			xml.getCatalog().forEach(l -> {l.tags.forEach(t -> { minus.forEach(m -> 
 			{
 				if (t.toLowerCase().equals(m.toLowerCase()))
 				{

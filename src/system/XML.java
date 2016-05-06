@@ -15,6 +15,7 @@ import java.util.concurrent.atomic.*;
 import java.util.stream.Collectors;
 
 import org.apache.commons.io.FilenameUtils;
+import org.jdom2.Attribute;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.input.SAXBuilder;
@@ -38,10 +39,9 @@ public class XML
 			if (!new File("data.xml").exists())
 			{		 
 			 	Element root = new Element("DATABASE");
-			 	Document createDocument = new Document();
-			 	
+			 	Document createDocument = new Document();				
 			 	AtomicInteger i = new AtomicInteger(0);
-				Files.walk(Paths.get("../Ladybug"))
+				Files.walk(Paths.get("./"))
 				 	 .filter(Files::isRegularFile)
 				 	 .filter(e -> e.toString().toLowerCase().contains(".jpeg") || 
 					  	   	  	  e.toString().toLowerCase().contains(".jpg") ||
@@ -49,6 +49,7 @@ public class XML
 					  	   	  	  e.toString().toLowerCase().contains(".tiff") ||
 					  	   	  	  e.toString().toLowerCase().contains(".mkv") ||
 					  	   	  	  e.toString().toLowerCase().contains(".mp4") ||
+					  	   	  	  e.toString().toLowerCase().contains(".mov") ||
 					  	   	  	  e.toString().toLowerCase().contains(".avi") ||
 					  	   	  	  e.toString().toLowerCase().contains(".wmv") ||
 					  	   	  	  e.toString().toLowerCase().contains(".txt") ||
@@ -66,6 +67,7 @@ public class XML
 					 		 				root.addContent(xmlLibraryFile);
 					 		 				i.getAndIncrement();
 					 			   		   });
+				
 				createDocument.setRootElement(root);
 			 	outputter = new XMLOutputter();
 			 	outputter.setFormat(Format.getCompactFormat());
@@ -118,6 +120,27 @@ public class XML
 		tag = illegal.stringToXML(tag);
 		doc.getChildren().get(id).getChild("tags").removeChild(tag);
 	}
+
+	public List<String> bList = new ArrayList<String>(); ///DELETE
+	public void addBlacklistTag  (String tag)
+	{
+		bList.add(tag);
+	}
+	
+	public void removeBlacklistTag  (String tag)
+	{
+		bList.remove(tag);
+	}
+	
+	public String getBlacklistTag ()
+	{
+		String text = "";
+		for (int i = 0; i < bList.size(); i++)
+		{
+			text += "-" + bList.get(i);
+		}
+		return text;
+	}
 	
 	public void refresh()
 	{
@@ -125,7 +148,7 @@ public class XML
 		try 
 		{
 			AtomicInteger i = new AtomicInteger(0);
-			Files.walk(Paths.get("../Library"))
+			Files.walk(Paths.get("./"))
 			 .filter(Files::isRegularFile)
 			 .filter(e -> e.toString().toLowerCase().contains(".jpeg") || 
 			  	   	  	  e.toString().toLowerCase().contains(".jpg") ||
@@ -133,6 +156,7 @@ public class XML
 			  	   	  	  e.toString().toLowerCase().contains(".tiff") ||
 			  	   	  	  e.toString().toLowerCase().contains(".mkv") ||
 			  	   	  	  e.toString().toLowerCase().contains(".mp4") ||
+			  	   	  	  e.toString().toLowerCase().contains(".mov") ||
 			  	   	  	  e.toString().toLowerCase().contains(".avi") ||
 			  	   	  	  e.toString().toLowerCase().contains(".wmv") ||
 			  	   	  	  e.toString().toLowerCase().contains(".txt") ||
@@ -179,7 +203,7 @@ public class XML
 		 				xmlLibraryFile.addContent(new Element("name").setText(r.name));
 		 				xmlLibraryFile.addContent(new Element("path").setText(r.path));
 		 				xmlLibraryFile.addContent(new Element("extension").setText(r.extension));
-		 				xmlLibraryFile.addContent(new Element("tags").addContent(new Element ("Default")).addContent(new Element ("All")));
+		 				xmlLibraryFile.addContent(new Element("tags").addContent(new Element ("Default")).addContent(new Element ("All")).addContent(new Element("New")));
 		 				doc.addContent(xmlLibraryFile);
 		 				i.getAndIncrement();
 				});
@@ -192,8 +216,5 @@ public class XML
 				});
 			}
 		}
-
-		
-		
 	}
 }
